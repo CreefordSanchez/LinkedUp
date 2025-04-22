@@ -1,0 +1,35 @@
+@import url(./utility.css);
+
+header {
+    background-color: var(--app-black);    
+}
+
+.header-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    height: 70px;
+}
+
+.header-content h1{
+    font-family: "Poetsen One", sans-serif;
+    color: var(--app-purple);
+}
+
+nav {
+    justify-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    color: var(--app-purple);
+    font-size: 25px;
+}
+
+.user-profile-header {
+    justify-items: end;
+}

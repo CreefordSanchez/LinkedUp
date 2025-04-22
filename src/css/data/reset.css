@@ -7,3 +7,8 @@
 html {
     font-family: "Poppins", sans-serif;
 }
+
+a, li {
+    text-decoration: none;
+    display: inline;
+}

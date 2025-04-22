@@ -1,0 +1,10 @@
+:root {
+    --app-black: #1c1d20;
+    --app-white: #fff;
+    --app-purple: #bb00bb;
+}
+
+.container {
+    width: min(100% - 20px, 1100px);
+    margin-inline: auto;
+}
