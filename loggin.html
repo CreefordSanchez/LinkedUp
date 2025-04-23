@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./src/css/login.css" media="all">
+        <script src="./src/js/login.js" type="module"></script>
     </head>
     </head>
     <body>
@@ -20,22 +21,61 @@
             </h1>
             </div>
             <div class="login-form-container">
-                <form>
+                <form class="login-form">
                     <div class="form-heading">
                         <h1 class="h1-size">Login</h1>
                         <p class="p-size">Enter your credential to access your account</p>
                     </div>
 
                     <div class="form">
-                        <p>Email</p>
-                        <input type="text">
-                        <p>Password</p>
-                        <input type="text">  
+                        <div class="flex-between">
+                            <p>Email</p>
+                            <p class="error-email-login"></p>
+                        </div>
+                        <input class="email-login" type="text">
 
-                        <button class="loggin-btn">Loggin</button>                        
+                        <div class="flex-between">
+                            <p>Password</p>
+                            <p class="error-password-login"></p>
+                        </div>
+                        <input class="password-login" type="text">  
+
+                        <button type="button" class="loggin-btn">Loggin</button>                        
                     </div>
-                    <div class="create-account">                            
-                        <p>Not a member yet? <a href="">Create an Account</a></p>
+                    <div class="form-choice-description">                            
+                        <p>Not a member yet? <a class="redirect-create-btn">Create an Account</a></p>
+                    </div>
+                </form>
+
+                <form class="create-form">
+                    <div class="form-heading">
+                        <h1 class="h1-size">Create account</h1>
+                        <p class="p-size">Enter your credential to create your account</p>
+                    </div>
+
+                    <div class="form">
+                        <div class="flex-between">
+                            <p>Name</p>
+                            <p class="error-name-create"></p>
+                        </div>
+                        <input class="name-create" type="text">
+
+                        <div class="flex-between">
+                            <p>Email</p>
+                            <p class="error-email-create"></p>
+                        </div>
+                        <input class="email-create" type="text">
+                        
+                        <div class="flex-between">
+                            <p>Password</p>
+                            <p class="error-password-create"></p>
+                        </div>
+                        <input class="password-create" type="text">  
+
+                        <button type="button" class="create-btn">Create</button>                        
+                    </div>
+                    <div class="form-choice-description">                            
+                        <p>Allready a member? <a class="redirect-login-btn">Loggin</a></p>
                     </div>
                 </form>
             </div>

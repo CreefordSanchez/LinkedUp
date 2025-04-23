@@ -21,3 +21,12 @@
     font-size: 32px;
     font-weight: 400;
 }
+
+.pad-15 {
+    padding-top: 15px;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
