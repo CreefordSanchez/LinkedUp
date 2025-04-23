@@ -10,7 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^1.8.4"
+    "axios": "^1.8.4",
+    "firebase": "^11.6.0"
   },
   "devDependencies": {
     "lite-server": "^2.6.1"

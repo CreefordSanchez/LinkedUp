@@ -1,6 +1,8 @@
 "use strict";
 
 import { listen, select, style } from "./data/utility.js";
+import { User } from "./data/models.js";
+import { newUser } from "./service/userService.js";
 
 //Login Validation
 const emailLogin = select('.email-login');
@@ -16,7 +18,7 @@ listen(logginBtn, 'click', () => {
         clearLogin();
     }
 });
-
+ 
 function clearLogin() {
     emailLogin.value = '';
     passwordLogin.value = '';
@@ -41,8 +43,13 @@ const errorPasswordCreate  = select('.error-password-create');
 const errorNameCreate = select('.error-name-create');
 
 listen(createBtn, 'click', () => {
-    if (createValidation()) {
+    if (createValidation()) {      
+        newUser(new User(nameCreate.value, emailCreate.value,
+            passwordCreate.value, ''
+        ));
+        
         clearCreate();
+        Redirection(false);
     }
 });
 
