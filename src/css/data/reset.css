@@ -12,3 +12,11 @@ a, li {
     text-decoration: none;
     display: inline;
 }
+
+input {
+    border: none;
+}
+
+button {
+    border: none;
+}
