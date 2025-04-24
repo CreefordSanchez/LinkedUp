@@ -1,6 +1,6 @@
 "use strict";
 
-import { getFirestore, getDocs,doc, setDoc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
+import { getFirestore, getDocs, doc, setDoc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 import { User } from "../data/models.js";
 
 const db = getFirestore();
@@ -22,7 +22,7 @@ const userConverter = {
 export async function newUser(user) {
     const list = await getAllUser();
     const findUser = list.find(obj => obj.Email == user.Email);
-    
+
     if (findUser != null) {
         return false;
     }
@@ -36,4 +36,14 @@ export async function getAllUser() {
     const users = snapshot.docs.map(doc => doc.data());
     
     return users;
+}
+
+export async function getUserByEmail(email) {
+    const user = await getDocs(query(collection(db, 'Users'), where('Email', '==', email)));
+
+    if (user.docs[0] == null) {
+        return null;
+    }
+
+    return user.docs[0].data();
 }

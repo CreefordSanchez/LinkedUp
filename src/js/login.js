@@ -2,7 +2,7 @@
 
 import { listen, select, style } from "./data/utility.js";
 import { User } from "./data/models.js";
-import { newUser, getAllUser } from "./service/userService.js";
+import { newUser, getAllUser, getUserByEmail } from "./service/userService.js";
 
 //Login Validation
 const emailLogin = select('.email-login');
@@ -32,9 +32,8 @@ function getExpires() {
 }
 
 async function logginValidation() {
-    const list = await getAllUser();
-    const user = list.find(obj => obj.Email == emailLogin.value);
-
+    const user = await getUserByEmail(emailLogin.value);
+    
     if (user == null) {
         errorEmailLoggin.textContent = 'Email not found';
         return false;
