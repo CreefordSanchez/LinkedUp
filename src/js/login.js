@@ -2,7 +2,7 @@
 
 import { listen, select, style } from "./data/utility.js";
 import { User } from "./data/models.js";
-import { newUser } from "./service/userService.js";
+import { newUser, getAllUser } from "./service/userService.js";
 
 //Login Validation
 const emailLogin = select('.email-login');
@@ -13,12 +13,31 @@ const errorPasswordLoggin = select('.error-password-login');
 
 let regex = /^[a-zA-Z0-9._%+-]+@[a-z]+\.com$/;
 
-listen(logginBtn, 'click', () => {
-    if (loginValidation()) {
-        clearLogin();
+listen(logginBtn, 'click', async () => {
+    if (validLoginInfo()) {
+        if (await logginValidation()) {
+            clearLogin();
+        }
     }
 });
  
+async function logginValidation() {
+    const list = await getAllUser();
+    const user = list.find(obj => obj.Email == emailLogin.value);
+
+    if (user == null) {
+        errorEmailLoggin.textContent = 'Email not found';
+        return false;
+    }
+
+    if (user.Password != passwordLogin.value) {
+        errorPasswordLoggin.textContent = 'Password is incorrect';
+        return false;
+    }
+
+    return true;
+}
+
 function clearLogin() {
     emailLogin.value = '';
     passwordLogin.value = '';
@@ -26,7 +45,7 @@ function clearLogin() {
     errorPasswordLoggin.textContent  = '';
 }
 
-function loginValidation() {
+function validLoginInfo() {
     let validEmail = checkEmail(emailLogin.value, errorEmailLoggin);
     let validPassword = checkPassword(passwordLogin.value, errorPasswordLoggin);
 
