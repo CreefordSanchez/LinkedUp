@@ -20,8 +20,7 @@ const userConverter = {
 }
 
 export async function newUser(user) {
-    const list = await getAllUser();
-    const findUser = list.find(obj => obj.Email == user.Email);
+    const findUser = await getUserByEmail(user.Email);
 
     if (findUser != null) {
         return false;
