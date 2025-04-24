@@ -13,7 +13,7 @@ const errorPasswordLoggin = select('.error-password-login');
 
 let regex = /^[a-zA-Z0-9._%+-]+@[a-z]+\.com$/;
 
-listen(logginBtn, 'click', async () => {
+listen(logginBtn, 'click', async () => {   
     if (validLoginInfo()) {
         if (await logginValidation()) {
             clearLogin();
@@ -21,6 +21,16 @@ listen(logginBtn, 'click', async () => {
     }
 });
  
+function setUserCookie(name) {
+    document.cookie = `Name=${name}; expires=${getExpires()}; path=/`;
+}
+
+function getExpires() {
+    const date = new Date();
+    date.setTime(date.getTime() + (24 * 60 * 60 * 1000)); 
+    return date.toUTCString();
+}
+
 async function logginValidation() {
     const list = await getAllUser();
     const user = list.find(obj => obj.Email == emailLogin.value);
@@ -35,6 +45,7 @@ async function logginValidation() {
         return false;
     }
 
+    setUserCookie(user.Name);
     return true;
 }
 
@@ -61,14 +72,15 @@ const errorEmailCreate  = select('.error-email-create');
 const errorPasswordCreate  = select('.error-password-create');
 const errorNameCreate = select('.error-name-create');
 
-listen(createBtn, 'click', () => {
-    if (createValidation()) {      
-        newUser(new User(nameCreate.value, emailCreate.value,
-            passwordCreate.value, ''
-        ));
-        
-        clearCreate();
-        Redirection(false);
+listen(createBtn, 'click', async () => {
+    if (createValidation()) {   
+        if (await newUser(new User(nameCreate.value, emailCreate.value,
+            passwordCreate.value, ''))) {
+                clearCreate();
+                Redirection(false);
+        } else {
+            errorEmailCreate.textContent = 'Email allready exist';
+        }             
     }
 });
 

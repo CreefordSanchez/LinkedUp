@@ -20,7 +20,15 @@ const userConverter = {
 }
 
 export async function newUser(user) {
+    const list = await getAllUser();
+    const findUser = list.find(obj => obj.Email == user.Email);
+    
+    if (findUser != null) {
+        return false;
+    }
+
     await addDoc(collection(db, 'Users').withConverter(userConverter), user);
+    return true;
 }
 
 export async function getAllUser() {
