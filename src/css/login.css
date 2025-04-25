@@ -2,7 +2,7 @@
 @import url(./data/utility.css);
 
 main {
-    background-color: #010101;
+    background-color: var(--app-dark-black);
     height: 100vh;
     padding: 10px;
     display: flex;

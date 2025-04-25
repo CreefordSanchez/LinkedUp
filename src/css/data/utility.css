@@ -1,11 +1,14 @@
 :root {
-    --app-black: #1c1d20;
+    --app-black: #0b0b0b;
     --app-white: #fff;
     --app-purple: #bb00bb;
+    --app-fade-purple: #6d006d;
+    --app-dark-black: #010101;
+    --app-gray: #1e1e1e;
 }
 
 .container {
-    width: min(100% - 20px, 1100px);
+    width: min(100% - 20px, 1250px);
     margin-inline: auto;
 }
 
@@ -22,6 +25,10 @@
     font-weight: 400;
 }
 
+.h2-size {
+    font-size: 25px;
+    font-weight: 500;
+}
 .pad-15 {
     padding-top: 15px;
 }
@@ -29,4 +36,10 @@
 .flex-between {
     display: flex;
     justify-content: space-between;
+}
+
+.line {
+    height: 1px;
+    border: solid 1px var(--app-gray);
+    margin: 10px 0;
 }

@@ -1,7 +1,8 @@
 @import url(./utility.css);
 
 header {
-    background-color: var(--app-black);    
+    background-color: var(--app-black);  
+    border-bottom: solid 1px var(--app-gray);  
 }
 
 .header-content {
@@ -22,11 +23,11 @@ nav {
 
 nav ul {
     display: flex;
-    gap: 40px;
+    gap: 60px;
 }
 
 nav a {
-    color: var(--app-purple);
+    color: var(--app-fade-purple);
     font-size: 25px;
 }
 
