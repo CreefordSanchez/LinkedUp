@@ -7,18 +7,33 @@
     background-color: var(--app-black);
     display: grid;
     grid-template-columns: 1fr 780px 1fr;
+    padding-top: 30px;
 }
 
 .left-side-container {
     height: 100%;
     padding: 12px 10px;
     color: var(--app-white);
-    border-right: 1px solid var(--app-gray);
+    border: 1px solid var(--app-white);
 }
 
 .right-side-container {
     height: 100%;
     padding: 12px 10px;
     color: var(--app-white);
-    border-left: 1px solid var(--app-gray);
+    border: 1px solid var(--app-white);
+}
+
+/*Scrolling section*/
+.scrolling-container {  
+    margin-inline: auto;
+    width: 100%;
+    padding: 0 100px;
+}
+
+.create-post-box {
+    background-color: #141414;
+    border-radius: 10px;
+    width: 100%;
+    height: 100px;
 }
