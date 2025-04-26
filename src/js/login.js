@@ -4,6 +4,12 @@ import { listen, select, style } from "./data/utility.js";
 import { User } from "./data/models.js";
 import { newUser, getAllUser, getUserByEmail } from "./service/userService.js";
 
+listen(window, 'load', () => {
+    if (document.cookie != '') {
+        window.location.href = 'index.html';
+    }
+});
+
 //Login Validation
 const emailLogin = select('.email-login');
 const passwordLogin = select('.password-login');
@@ -13,17 +19,17 @@ const errorPasswordLoggin = select('.error-password-login');
 
 let regex = /^[a-zA-Z0-9._%+-]+@[a-z]+\.com$/;
 
-listen(logginBtn, 'click', async () => {   
+listen(logginBtn, 'click', async () => {  
     if (validLoginInfo()) {
         if (await logginValidation()) {
             clearLogin();
-            window.location.href = './index.html';
+            //window.location.href = './index.html';
         }
     }
 });
  
-function setUserCookie(name) {
-    document.cookie = `Name=${name}; expires=${getExpires()}; path=/`;
+function setUserCookie(user) {
+    document.cookie = `Email=${user.Email}; expires=${getExpires()}; path=/`;
 }
 
 function getExpires() {
@@ -45,7 +51,7 @@ async function logginValidation() {
         return false;
     }
 
-    setUserCookie(user.Name);
+    setUserCookie(user);
     return true;
 }
 
