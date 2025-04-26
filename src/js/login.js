@@ -17,6 +17,7 @@ listen(logginBtn, 'click', async () => {
     if (validLoginInfo()) {
         if (await logginValidation()) {
             clearLogin();
+            window.location.href = './index.html';
         }
     }
 });
