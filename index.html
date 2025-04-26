@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./src/css/index.css" media="all">
+        <script src="./src/js/index.js" type="module"></script>
     </head>
     <body>
         <main>
@@ -38,13 +39,57 @@
                     
                 </section>
                 <section class="scrolling-container">
-                    <div class="create-post-box">
-
+                    <div class="create-post-box padding-around">
+                        <div class="mock-input-box flex">
+                            <div class="create-pf"></div>
+                            <div class="show-create-form input-create flex-center">
+                                <p>Something in mind?</p>
+                            </div>
+                        </div>
+                        <div class="mock-create-btn flex-between flex-align-center">
+                            <div class="show-create-form img-button flex-align-center">                                
+                                <i class="fa-solid fa-image"></i>
+                                <p>Image</p>
+                            </div>
+                            <div class="show-create-form post-button">
+                                <p>Post</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section class="right-side-container">
 
                 </section>
+            </div>
+
+            <div class="create-post-form-container flex-center">
+                <div class="create-post-form padding-around border-10">
+                    <div class="create-header flex-center">                        
+                        <h2>Create Post</h2>
+                        <button class="close-create-form flex-center">
+                            <i class="fa-solid fa-x"></i>
+                        </button>
+                    </div>
+                    <div class="create-input">
+                        <div class="create-user-profile gap-10 flex-align-center">
+                            <div class="profile"></div>
+                            <p class="user-name">Example</p>
+                        </div>
+                        <form>
+                            <textarea placeholder="Enter text here" class="post-description"></textarea>
+                            <div class="select-image-box flex-between">
+                                <form>
+                                    <div class="select-image">
+                                        <i class="fa-solid fa-image"></i>
+                                        <p class="image-path">None</p>
+                                    </div>
+                                    <button type="button" class="post-btn">Post</button>
+                                    <input class="post-image" type="file">    
+                                </form>
+                            </div>
+                        </form>
+                     </div>
+                </div>                
             </div>
         </main>
     </body>

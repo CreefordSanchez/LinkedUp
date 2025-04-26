@@ -35,5 +35,128 @@
     background-color: #141414;
     border-radius: 10px;
     width: 100%;
-    height: 100px;
+}
+
+.mock-input-box {
+    padding-bottom: 15px;    
+    border-bottom: solid 1px var(--app-gray);
+}
+
+.create-pf {
+    height: 40px;
+    min-width: 40px;
+    border-radius: 20px;
+    background-color: var(--app-black);
+}
+
+.input-create {
+    width: 100%;
+    background-color: var(--app-gray);
+    border-radius: 15px;
+    margin-left: 10px;
+    color: var(--app-white);
+}
+
+.mock-create-btn {
+    padding-top: 15px;
+    height: calc(100% - 56px);
+}
+
+.img-button {
+    gap: 5px;
+    color: var(--app-white);
+}
+
+.post-button {
+    background-color: var(--app-purple);
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.show-create-form {
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.show-create-form:hover {
+    background-color: var(--app-white);
+    color: var(--app-purple);
+}
+
+main {
+    position: relative;
+}
+
+.create-post-form-container {
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.692);
+    height: 100%;
+    width: 100%;
+}
+
+.create-post-form {
+    height: 328px;
+    width: 500px;
+    background-color: #141414;
+    color: var(--app-white);
+}
+
+.create-header {
+    position: relative;
+    border-bottom: 2px solid var(--app-gray);
+    padding-bottom: 10px;
+}
+
+.close-create-form {
+    position: absolute;
+    right: 0;
+    background-color: var(--app-gray);
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
+    color: var(--app-white);
+    
+}
+
+.create-input {
+    padding-top: 10px;
+}
+
+.post-description {
+    background-color: #141414;
+    padding: 10px 5px;
+    width: 100%;
+    height: 154px;
+    color: var(--app-white);
+    font-size: 18px;
+}
+
+.select-image-box {
+    position: relative;
+}
+
+.select-image {
+    display: flex;
+    gap: 5px;
+}
+
+.select-image .fa-image {
+    font-size: 25px;
+}
+
+.post-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 26px;
+    z-index: 1;
+    opacity: 0;
+}
+
+.post-btn {
+    background-color: var(--app-purple);
+    padding: 10px 20px;
+    border-radius: 5px;
 }

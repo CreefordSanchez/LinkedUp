@@ -13,8 +13,11 @@ a, li {
     display: inline;
 }
 
-input {
+input, textarea {
     border: none;
+    resize: none;
+    font-family: "Poppins", sans-serif;
+    outline: none;
 }
 
 button {

@@ -37,8 +37,46 @@
     justify-content: space-between;
 }
 
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+
 .line {
     height: 1px;
     border: solid 1px var(--app-gray);
     margin: 10px 0;
+}
+
+.padding-around {
+    padding: 12px 14px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border-5 {
+    border-radius: 5px;
+}
+
+.border-10 {
+    border-radius: 10px;
+}
+
+.profile {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-color: var(--app-black);
+}
+
+.gap-10 {
+    gap: 10px;
 }
