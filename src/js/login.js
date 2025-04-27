@@ -1,7 +1,6 @@
 "use strict";
 
 import { listen, select, style } from "./data/utility.js";
-import { User } from "./data/models.js";
 import { newUser, getAllUser, getUserByEmail } from "./service/userService.js";
 
 listen(window, 'load', () => {
@@ -82,8 +81,7 @@ const errorNameCreate = select('.error-name-create');
 
 listen(createBtn, 'click', async () => {
     if (createValidation()) {   
-        if (await newUser(new User(nameCreate.value, emailCreate.value,
-            passwordCreate.value, ''))) {
+        if (await newUser(nameCreate.value, emailCreate.value, passwordCreate.value)) {
                 clearCreate();
                 Redirection(false);
         } else {

@@ -1,32 +1,22 @@
 "use strict";
 
 import { getFirestore, getDocs, doc, setDoc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
-import { User } from "../data/models.js";
 
 const db = getFirestore();
-const userConverter = {
-    toFirestore: (user) => {
-        return {
-            Name: user.Name,
-            Email: user.Email,
-            Password: user.Password,
-            ProfilePicture: user.ProfilePicture
-        }
-    },
-    fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options);
-        return new User(data.Name, data.Email, data.Password, data.ProfilePicture);
-    }
-}
 
-export async function newUser(user) {
-    const findUser = await getUserByEmail(user.Email);
+export async function newUser(name, email, password) {
+    const findUser = await getUserByEmail(email);
 
     if (findUser != null) {
         return false;
     }
 
-    await addDoc(collection(db, 'Users').withConverter(userConverter), user);
+    await addDoc(collection(db, 'Users'), {
+        Name: name,
+        Email: email,
+        Password: password,
+        ProfilePicture: ''
+    });
     return true;
 }
 
