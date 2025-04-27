@@ -38,7 +38,7 @@ export async function getUserByEmail(email) {
 }
 
 export async function getUserById(id) {
-    const user = await getDoc(db, 'Users', id);
+    const user = await getDoc(doc(db, 'Users', id));
 
     if (user == null) {
         return null;

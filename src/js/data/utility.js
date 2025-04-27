@@ -16,7 +16,9 @@ export function style(select, type, value) {
     return select.style[type] = value;
 }
 
-export function toBase64(img) {
+export async function toBase64(img) {
+    if (img == null) return null;
+    
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
     

@@ -159,7 +159,7 @@ main {
 }
 
 .post-btn {
-    background-color: var(--app-purple);
+    background-color: var(--app-fade-purple);
     padding: 10px 20px;
     border-radius: 5px;
     margin-top: 15px;

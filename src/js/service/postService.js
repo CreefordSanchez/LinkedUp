@@ -1,0 +1,13 @@
+'use strict';
+
+import {getFirestore, getDocs, doc, setDoc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
+
+const db = getFirestore();
+
+export async function newPost(userId, description, photo) {
+    await addDoc(collection(db, 'Post'), {
+        UserId: userId,
+        Description: description,
+        Photo: photo == null ? '' : photo
+    });
+}
