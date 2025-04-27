@@ -30,3 +30,13 @@ export function toBase64(img) {
 export function toImage(base64) {
     return `data:image/jpeg;base64,${base64}`;
 }
+
+export function removecookie() {
+    const cookies = document.cookie.split(";");
+
+    for (let cookie of cookies) {
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substring(0, eqPos).trim() : cookie.trim();
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
+    }
+}
