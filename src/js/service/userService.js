@@ -44,5 +44,15 @@ export async function getUserByEmail(email) {
         return null;
     }
 
-    return user.docs[0].data();
+    return user.docs[0];
+}
+
+export async function getUserById(id) {
+    const user = await getDoc(db, 'Users', id);
+
+    if (user == null) {
+        return null;
+    }
+
+    return user;
 }

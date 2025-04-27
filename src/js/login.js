@@ -23,13 +23,13 @@ listen(logginBtn, 'click', async () => {
     if (validLoginInfo()) {
         if (await logginValidation()) {
             clearLogin();
-            //window.location.href = './index.html';
+            window.location.href = './index.html';
         }
     }
 });
  
 function setUserCookie(user) {
-    document.cookie = `Email=${user.Email}; expires=${getExpires()}; path=/`;
+    document.cookie = `userId=${user.id}; expires=${getExpires()}; path=/`;
 }
 
 function getExpires() {
@@ -39,19 +39,21 @@ function getExpires() {
 }
 
 async function logginValidation() {
-    const user = await getUserByEmail(emailLogin.value);
-    
-    if (user == null) {
+    const getUser = await getUserByEmail(emailLogin.value);
+
+    if (getUser == null) {
         errorEmailLoggin.textContent = 'Email not found';
         return false;
     }
+
+    const user = getUser.data();
 
     if (user.Password != passwordLogin.value) {
         errorPasswordLoggin.textContent = 'Password is incorrect';
         return false;
     }
 
-    setUserCookie(user);
+    setUserCookie(getUser);
     return true;
 }
 

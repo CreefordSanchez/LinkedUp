@@ -1,10 +1,11 @@
 'use strict';
 
-import { listen, select, style, selectAll } from './data/utility.js';
+import { removecookie, listen, select, style, selectAll } from './data/utility.js';
+import { getUserByEmail } from './service/userService.js';
 
 listen(window, 'load', () => {
     if (document.cookie == '') {
-        //window.location.href = './loggin.html';
+        window.location.href = './loggin.html';
     }
 });
 
@@ -24,6 +25,13 @@ const postImage = select('.post-image');
 const postText = select('.post-description');
 const imageBox = select('.select-image-box');
 const addImageLogo = select('.select-image-logo');
+const postBtn = select('.post-btn');
+
+listen(postBtn, 'click', async () => {
+    const test = await getUserByEmail('creewrk@gmail.com');
+    console.log(test.data().Name);
+});
+
 listen(postImage, 'change', () => {
     const file = postImage.files[0];
 

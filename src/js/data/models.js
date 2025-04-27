@@ -8,3 +8,4 @@ export class User {
         this.ProfilePicture = profilePicture
     }
 }
+ 
