@@ -21,20 +21,34 @@ showCreate.forEach(btn => {
 const closeCreate = select('.close-create-form');
 const createForm = select('.create-post-form-container');
 const postImage = select('.post-image');
-const postImageVal = select('.image-path');
 const postText = select('.post-description');
+const imageBox = select('.select-image-box');
+const addImageLogo = select('.select-image-logo');
+listen(postImage, 'change', () => {
+    const file = postImage.files[0];
+
+    if (file != null) {
+        const reader = new FileReader();
+        reader.onload = (item) => {
+            style(imageBox, 'backgroundImage', `url(${item.target.result})`);
+            style(addImageLogo, 'display', 'none');
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
 
 listen(closeCreate, 'click', () => {
     postText.value = '';
-    postImageVal.textContent = 'none';
     closeForm(true);
 });
 
 function closeForm(remove) {
     if (remove) {
+        style(imageBox, 'backgroundImage', 'none');
+        style(addImageLogo, 'display', 'inline');
         style(createForm, 'display', 'none');
     } else {
         style(createForm, 'display', 'flex');
     }
 } 
-
