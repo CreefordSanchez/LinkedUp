@@ -4,6 +4,8 @@
     --app-purple: #bb00bb;
     --app-fade-purple: #6d006d;
     --app-gray: #1e1e1e;
+    --app-light-gray: #141414;
+    --app-black-transparent:  rgba(0, 0, 0, 0.692);
 }
 
 .container {

@@ -29,10 +29,11 @@
     margin-inline: auto;
     width: 100%;
     padding: 0 100px;
+    overflow-y: auto;
 }
 
 .create-post-box {
-    background-color: #141414;
+    background-color: var(--app-light-gray);
     border-radius: 10px;
     width: 100%;
 }
@@ -90,7 +91,7 @@ main {
 .create-post-form-container {
     position: absolute;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.692);
+    background-color:var(--app-black-transparent);
     height: 100%;
     width: 100%;
     display: none;
@@ -164,4 +165,110 @@ main {
     border-radius: 5px;
     margin-top: 15px;
     width: 100%;
+}
+
+/*List of post*/
+.post-box {
+    background-color: var(--app-light-gray);
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 10px;
+    color: var(--app-white);
+}
+
+.post-header {    
+    padding: 12px 14px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-text, .like-counter{
+    margin: 5px 14px;
+}
+
+.post-box img {
+    width: 100%;
+}
+
+.post-buttons {    
+    padding: 12px 0;
+    margin: 12px 14px;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    border-top: 1px solid var(--app-gray);
+}
+
+.post-buttons i {
+    font-size: 20px;
+}
+
+.like-btn, .comment-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--app-light-gray);
+    color: var(--app-white);
+}
+
+/*Comment post*/
+.comment-post-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--app-black-transparent);
+}
+
+.comment-post {
+    background-color: var(--app-light-gray);
+    width: 700px;
+    height: 500px;
+    color: var(--app-white);
+}
+
+.comment-post-header {
+    border-bottom: 2px solid var(--app-gray);
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.comment-post-header h2 {
+    font-weight: 400;
+}
+
+.close-comment-post {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: var(--app-gray);
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
+    color: var(--app-white);
+}
+
+.user-comment {
+    gap: 10px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.user-comment .profile {
+    min-width: 40px;
+}
+
+.text {
+    background-color: var(--app-gray);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.user-comment-name {
+    font-weight: 500;
 }

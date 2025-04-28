@@ -99,3 +99,11 @@ function closeForm(remove) {
         style(createForm, 'display', 'flex');
     }
 } 
+
+//Comment Post
+const commentContainer = select('.comment-post-container');
+const closeCommentBtn = select('.close-comment-post');
+
+listen(closeCommentBtn, 'click', () => {
+    style(commentContainer, 'display', 'none');
+});
