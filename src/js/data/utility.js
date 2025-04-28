@@ -42,3 +42,15 @@ export function removecookie() {
         document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
     }
 }
+
+export function newElement(tag) {
+    return document.createElement(tag);
+}
+
+export function giveClass(name) {
+    return this.classList.add(name);
+}
+
+export function newElementClass(type, name) {
+    return Object.assign(document.createElement(type), {className: name});
+}
