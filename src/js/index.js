@@ -21,7 +21,6 @@ showCreate.forEach(btn => {
 });
 
 //Create form
-const createFormBox = select('.create-post-box');
 const closeCreate = select('.close-create-form');
 const createForm = select('.create-post-form-container');
 const postImage = select('.post-image');
@@ -40,10 +39,10 @@ listen(postBtn, 'click', async () => {
 
         addUserPost({
             UserId: id,
-            Photo: image,
+            Photo: image == null ? '' : image,
             Description: description,
             Likes: 0
-        }, user);
+        }, user.data());
 
         closeCreate.click();
     }
