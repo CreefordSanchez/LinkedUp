@@ -6,7 +6,8 @@ const db = getFirestore();
 
 export async function addUserLikePost(userId, postId) {
     const likesList = await getPostLikes(postId);
-    const userLike = likesList.docs.find(like => like.data().UserId == userId);
+    const userLike = likesList.docs.find(like => like.data().UserId == userId 
+    && like.data().PostId == postId);
 
     if (userLike == null) {
         await addDoc(collection(db, 'PostLikes'), {
@@ -19,7 +20,7 @@ export async function addUserLikePost(userId, postId) {
 }
 
 export async function getPostLikes(postId) {
-    return await getDocs(collection(db, 'PostLikes'), where('Postd', '==', postId));
+    return await getDocs(query(collection(db, 'PostLikes'), where('PostId', '==', postId)));
 }
 
 export async function removeUserLike(likeId) {
