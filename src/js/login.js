@@ -138,12 +138,7 @@ function checkName(name, error) {
         error.textContent = 'Enter Name';
         return false;
     }     
-
-    if (name.split(' ').length == 1) {
-        error.textContent = 'Enter a valid Name';
-        return false;
-    } 
-
+    
     error.textContent = '';
     return true;
 }
