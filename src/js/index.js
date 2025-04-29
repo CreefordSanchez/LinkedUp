@@ -1,8 +1,9 @@
 'use strict';
 
-import { toBase64, listen, select, style, selectAll, giveClass, newElementClass, toImage } from './data/utility.js';
+import { toBase64, listen, select, style, selectAll, giveClass, newElementClass, toImage, getCookieUser } from './data/utility.js';
 import { getUserByEmail, getUserById } from './service/userService.js';
-import { newPost, GetAllPost } from './service/postService.js';
+import { newPost, getAllPost, getPostById } from './service/postService.js';
+import { addUserLikePost, getPostLikes } from './service/postLikeService.js'
 
 //Load content
 const userHeader = select('.user-profile-header');
@@ -22,18 +23,17 @@ async function loadMainContent () {
 }
 
 async function loadPost() {
-    const postList = await GetAllPost();
-
-    for (const post of postList) {
-        const user = await getUserById(post.UserId);
+    const postList = await getAllPost();
+    for (const post of postList.docs) {
+        const user = await getUserById(post.data().UserId);
         addUserPost(post, user.data());
         
     }
 }
 
-function addUserPost(post, user) {
+function addUserPost(postDoc, user) {
     const postBox = newElementClass('div', 'post-box');
-    
+    const post = postDoc.data();
     postBox.innerHTML = `
         <div class="post-header">
             <div class="profile" style="background-image: url(${toImage(user.ProfilePicture)});"></div>
@@ -41,18 +41,17 @@ function addUserPost(post, user) {
         </div>    
         <p class="post-text">${post.Description}</p>  
         ${post.Photo == '' ? '' : `<img src="${toImage(post.Photo)}">`}
-        <p class="like-counter"><i class="fa-solid fa-thumbs-up"></i> ${post.Likes}</p>
+        <p class="like-counter" data-id="${postDoc.id}"><i class="fa-solid fa-thumbs-up"></i> ${post.Likes}</p>
         <div class="post-buttons">
-            <button class="like-btn">
+            <button class="like-btn" data-id="${postDoc.id}">
                 <i class="fa-solid fa-thumbs-up"></i>
                 <p>Like</p>
             </button>
-            <button class="comment-btn">
+            <button class="comment-btn" data-id="${postDoc.id}">
                 <i class="fa-solid fa-comment"></i>
                 <p>Comment</p>
             </button>
         </div>`;
-
     postContainer.append(postBox);
 }
 
@@ -73,7 +72,7 @@ showCreate.forEach(btn => {
     });
 });
 
-//Create form
+//Add new post form
 const closeCreate = select('.close-create-form');
 const createForm = select('.create-post-form-container');
 const postImage = select('.post-image');
@@ -162,6 +161,26 @@ function closeForm(remove) {
         style(createForm, 'display', 'flex');
     }
 } 
+
+
+//HAndle Action by target
+listen(postContainer, 'click', async(e) => {
+    const element = e.target;
+
+    if (element.closest('.like-btn')) {        
+        let id = element.closest('.like-btn').dataset.id;
+        await addPostLike(id);
+    }
+});
+
+async function addPostLike(postId) {
+    await addUserLikePost(getCookieUser(), postId);
+
+    const likeCounter = select(`.like-counter[data-id="${postId}"]`);
+    const likeList = await getPostLikes(postId);
+
+    likeCounter.innerHTML = `<i class="fa-solid fa-thumbs-up"></i> ${likeList.size}`;
+}
 
 //Comment Post
 const commentContainer = select('.comment-post-container');

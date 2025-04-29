@@ -32,5 +32,8 @@ nav a {
 }
 
 .user-profile-header {
-    justify-items: end;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: var(--app-white);
 }

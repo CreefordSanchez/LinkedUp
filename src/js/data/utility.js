@@ -54,3 +54,7 @@ export function giveClass(name) {
 export function newElementClass(type, name) {
     return Object.assign(document.createElement(type), {className: name});
 }
+
+export function getCookieUser() {
+    return document.cookie.split('=')[1];
+}
