@@ -4,12 +4,65 @@ import { toBase64, listen, select, style, selectAll, giveClass, newElementClass,
 import { getUserByEmail, getUserById } from './service/userService.js';
 import { newPost, GetAllPost } from './service/postService.js';
 
+//Load content
+const userHeader = select('.user-profile-header');
+const postContainer = select('.scrolling-container');
+
 listen(window, 'load', async () => {
     if (document.cookie == '') {
         window.location.href = './loggin.html';
     } 
-    await loadPost();
+    await loadMainContent();
+    
 });
+
+async function loadMainContent () {
+    await loadUserHeader();
+    await loadPost();
+}
+
+async function loadPost() {
+    const postList = await GetAllPost();
+
+    for (const post of postList) {
+        const user = await getUserById(post.UserId);
+        addUserPost(post, user.data());
+        
+    }
+}
+
+function addUserPost(post, user) {
+    const postBox = newElementClass('div', 'post-box');
+    
+    postBox.innerHTML = `
+        <div class="post-header">
+            <div class="profile" style="background-image: url(${toImage(user.ProfilePicture)});"></div>
+            <p class='user-post-name'>${user.Name}</p>
+        </div>    
+        <p class="post-text">${post.Description}</p>  
+        ${post.Photo == '' ? '' : `<img src="${toImage(post.Photo)}">`}
+        <p class="like-counter"><i class="fa-solid fa-thumbs-up"></i> ${post.Likes}</p>
+        <div class="post-buttons">
+            <button class="like-btn">
+                <i class="fa-solid fa-thumbs-up"></i>
+                <p>Like</p>
+            </button>
+            <button class="comment-btn">
+                <i class="fa-solid fa-comment"></i>
+                <p>Comment</p>
+            </button>
+        </div>`;
+
+    postContainer.append(postBox);
+}
+
+async function loadUserHeader() {
+    let userId = document.cookie.split('=')[1];
+    const user = await getUserById(userId);
+    userHeader.innerHTML = `
+    <div class="profile"></div>
+    <p>${user.data().Name}</p>`;
+}
 
 //mock create form 
 const showCreate = selectAll('.show-create-form');
@@ -118,39 +171,3 @@ listen(closeCommentBtn, 'click', () => {
     style(commentContainer, 'display', 'none');
 });
 
-//List of post
-const postContainer = select('.scrolling-container');
-async function loadPost() {
-    const postList = await GetAllPost();
-
-    for (const post of postList) {
-        const user = await getUserById(post.UserId);
-        addUserPost(post, user.data());
-        
-    }
-}
-
-function addUserPost(post, user) {
-    const postBox = newElementClass('div', 'post-box');
-    
-    postBox.innerHTML = `
-        <div class="post-header">
-            <div class="profile" style="background-image: url(${toImage(user.ProfilePicture)});"></div>
-            <p class='user-post-name'>${user.Name}</p>
-        </div>    
-        <p class="post-text">${post.Description}</p>  
-        ${post.Photo == '' ? '' : `<img src="${toImage(post.Photo)}">`}
-        <p class="like-counter"><i class="fa-solid fa-thumbs-up"></i> ${post.Likes}</p>
-        <div class="post-buttons">
-            <button class="like-btn">
-                <i class="fa-solid fa-thumbs-up"></i>
-                <p>Like</p>
-            </button>
-            <button class="comment-btn">
-                <i class="fa-solid fa-comment"></i>
-                <p>Comment</p>
-            </button>
-        </div>`;
-
-    postContainer.append(postBox);
-}
