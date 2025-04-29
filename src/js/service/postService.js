@@ -18,9 +18,5 @@ export async function getAllPost() {
 }
 
 export async function getPostById(id) {
-    return await getDoc(db, 'Posts', 'id');
-}
-
-export async function updatePost(post, id) {
-    
+    return await getDoc(db, 'Posts', id);
 }

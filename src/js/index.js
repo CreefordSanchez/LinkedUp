@@ -26,14 +26,14 @@ async function loadPost() {
     const postList = await getAllPost();
     for (const post of postList.docs) {
         const user = await getUserById(post.data().UserId);
-        addUserPost(post, user.data());
+        await addUserPost(post, user.data());
         
     }
 }
 
 async function addUserPost(postDoc, user) {
     const postBox = newElementClass('div', 'post-box');
-    const post = postDoc.data();
+    const post = typeof postDoc?.data == 'function' ? postDoc.data() : postDoc;
     const likeList = await getPostLikes(postDoc.id);
 
     postBox.innerHTML = `
@@ -91,7 +91,7 @@ listen(postBtn, 'click', async () => {
         await newPost(id, description, image);
         const user = await getUserById(id);
 
-        addUserPost({
+        await addUserPost({
             UserId: id,
             Photo: image == null ? '' : image,
             Description: description,
