@@ -6,6 +6,7 @@
     --app-gray: #1e1e1e;
     --app-light-gray: #141414;
     --app-black-transparent:  rgba(0, 0, 0, 0.692);
+    --app-no-color: #00000000;
 }
 
 .container {
