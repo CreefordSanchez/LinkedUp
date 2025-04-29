@@ -31,9 +31,11 @@ async function loadPost() {
     }
 }
 
-function addUserPost(postDoc, user) {
+async function addUserPost(postDoc, user) {
     const postBox = newElementClass('div', 'post-box');
     const post = postDoc.data();
+    const likeList = await getPostLikes(postDoc.id);
+
     postBox.innerHTML = `
         <div class="post-header">
             <div class="profile" style="background-image: url(${toImage(user.ProfilePicture)});"></div>
@@ -41,7 +43,7 @@ function addUserPost(postDoc, user) {
         </div>    
         <p class="post-text">${post.Description}</p>  
         ${post.Photo == '' ? '' : `<img src="${toImage(post.Photo)}">`}
-        <p class="like-counter" data-id="${postDoc.id}"><i class="fa-solid fa-thumbs-up"></i> ${post.Likes}</p>
+        <p class="like-counter" data-id="${postDoc.id}"><i class="fa-solid fa-thumbs-up"></i> ${likeList.size}</p>
         <div class="post-buttons">
             <button class="like-btn" data-id="${postDoc.id}">
                 <i class="fa-solid fa-thumbs-up"></i>
@@ -163,7 +165,7 @@ function closeForm(remove) {
 } 
 
 
-//HAndle Action by target
+//Handle like/comment Action by target
 listen(postContainer, 'click', async(e) => {
     const element = e.target;
 
