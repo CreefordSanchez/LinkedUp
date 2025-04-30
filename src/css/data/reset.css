@@ -9,6 +9,10 @@ html {
     color: var(--app-white);
 }
 
+body {
+    background-color: var(--app-black);
+}
+
 a, li {
     text-decoration: none;
     display: inline;

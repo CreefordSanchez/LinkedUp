@@ -1,0 +1,46 @@
+@import url(./data/reset.css);
+@import url(./data/layout.css);
+@import url(./data/utility.css);
+@import url(./data/postBox.css);
+
+.profile-user-detail {
+    width: min(100% - 20px, 800px);
+    margin-inline: auto;
+}
+
+.profile-detail {
+    width: 300px;
+}
+
+.profile-user-detail .profile {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+}
+
+.user-name {
+    font-weight: 300;
+}
+
+.edit-profile {
+    background-color: var(--app-gray);
+    color: var(--app-white);
+}
+
+.user-counter {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.user-counter button {
+    background-color: var(--app-no-color);
+    text-align: start;
+    color: var(--app-white);
+    font-size: 16px;
+}
+
+/*List of post*/
+.scrolling-container{
+    width: min(100% - 20px, 1000px);
+    margin-inline: auto;
+}

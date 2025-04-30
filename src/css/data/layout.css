@@ -2,7 +2,7 @@
 
 header {
     background-color: var(--app-black);  
-    border-bottom: solid 1px var(--app-gray);  
+    border-bottom: solid 2px var(--app-gray);  
 }
 
 .header-content {

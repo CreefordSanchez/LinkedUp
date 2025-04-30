@@ -59,7 +59,6 @@ async function addUserPost(postDoc, user) {
 async function loadUserHeader() {
     let userId = document.cookie.split('=')[1];
     const user = await getUserById(userId);
-    console.log(`${toImage(user.data().ProfilePicture)}`);
     userHeader.innerHTML = `
     <div class="profile" style="background-image: url(${toImage(user.data().ProfilePicture)})"></div>
     <p>${user.data().Name}</p>`;
