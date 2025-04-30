@@ -33,6 +33,7 @@ nav a {
 
 .user-profile-header {
     display: flex;
+    gap: 5px;
     justify-content: end;
     align-items: center;
     color: var(--app-white);
