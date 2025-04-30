@@ -26,8 +26,7 @@ async function loadPost() {
     const postList = await getAllPost();
     for (const post of postList.docs) {
         const user = await getUserById(post.data().UserId);
-        await addUserPost(post, user.data());
-        
+        await addUserPost(post, user.data());        
     }
 }
 
@@ -43,7 +42,7 @@ async function addUserPost(postDoc, user) {
         </div>    
         <p class="post-text">${post.Description}</p>  
         ${post.Photo == '' ? '' : `<img src="${toImage(post.Photo)}">`}
-        <p class="like-counter" data-id="${postDoc.id}"><i class="fa-solid fa-thumbs-up"></i> ${likeList.size}</p>
+        <p class="like-counter" data-id="${postDoc.id}"><i class="fa-solid fa-thumbs-up"></i> ${likeList == null ? 0 : likeList.size}</p>
         <div class="post-buttons">
             <button class="like-btn" data-id="${postDoc.id}">
                 <i class="fa-solid fa-thumbs-up"></i>
@@ -95,7 +94,8 @@ listen(postBtn, 'click', async () => {
             UserId: id,
             Photo: image == null ? '' : image,
             Description: description,
-            Likes: 0
+            Likes: 0,
+
         }, user.data());
 
         closeCreate.click();
@@ -154,6 +154,7 @@ function validButton(isValid) {
         style(postBtn, 'backgroundColor', '#6d006d');
     }
 }
+
 function closeForm(remove) {
     if (remove) {
         style(imageBox, 'backgroundImage', 'none');

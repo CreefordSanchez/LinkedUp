@@ -8,8 +8,7 @@ export async function newPost(userId, description, photo) {
     await addDoc(collection(db, 'Posts'), {
         UserId: userId,
         Description: description,
-        Photo: photo == null ? '' : photo,
-        Likes: 0
+        Photo: photo == null ? '' : photo
     });
 }
 
