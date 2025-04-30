@@ -230,6 +230,10 @@ async function printCommentPost(doc) {
     const comment = newElementClass('div', 'user-comment');
     const user = await getUserById(doc.UserId);
 
+    if (select('.no-comment-found') != null) {
+        commentList.innerHTML = '';
+    }
+
     comment.innerHTML = `
     <div class="profile"></div>
     <div class="text">
