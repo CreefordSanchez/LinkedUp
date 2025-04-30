@@ -6,6 +6,7 @@
 
 html {
     font-family: "Poppins", sans-serif;
+    color: var(--app-white);
 }
 
 a, li {

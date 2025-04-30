@@ -31,6 +31,12 @@
     font-size: 25px;
     font-weight: 500;
 }
+
+.h3-size {
+    font-size: 20px;
+    font-weight: 500;
+}
+
 .pad-15 {
     padding-top: 15px;
 }
@@ -77,11 +83,15 @@
     height: 40px;
     width: 40px;
     border-radius: 20px;
-    background-color: var(--app-black);
+    background-color: var(--app-white);
 }
 
 .gap-10 {
     gap: 10px;
+}
+
+.gap-5 {
+    gap: 5px;
 }
 
 .scroll-hidden {

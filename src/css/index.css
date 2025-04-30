@@ -10,20 +10,6 @@
     padding-top: 30px;
 }
 
-.left-side-container {
-    height: 100%;
-    padding: 12px 10px;
-    color: var(--app-white);
-    border: 1px solid var(--app-white);
-}
-
-.right-side-container {
-    height: 100%;
-    padding: 12px 10px;
-    color: var(--app-white);
-    border: 1px solid var(--app-white);
-}
-
 /*Scrolling section*/
 .scrolling-container {  
     margin-inline: auto;
@@ -309,4 +295,34 @@ main {
     color: var(--app-light-gray);
     background-color: var(--app-no-color);
     justify-self: end;
+}
+
+/*Friend List*/
+.right-side-container {
+    height: 100%;
+    padding: 12px 10px;
+    color: var(--app-white);
+}
+
+.friend-list-header i{
+    font-size: 20px;
+}
+
+.user-friend {
+    align-items: center;
+}
+
+.user-friend p {
+    font-size: 14px; 
+}
+
+/*Chat List*/
+.left-side-container {
+    height: 100%;
+    padding: 12px 10px;
+    color: var(--app-white);
+}
+
+.side-menu i {
+    color: var(--app-fade-purple);
 }
