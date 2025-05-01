@@ -65,7 +65,7 @@ async function loadUserHeader() {
     <div class="profile">
         ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
     </div>
-    <p>${user.data().Name}</p>`;
+    <a class="user-post-name" href="./userProfile.html?userId=${userId}">${user.data().Name}</a>`;
 }
 
 //mock create form 
