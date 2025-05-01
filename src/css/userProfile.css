@@ -2,6 +2,7 @@
 @import url(./data/layout.css);
 @import url(./data/utility.css);
 @import url(./data/postBox.css);
+@import url(./data/comment.css);
 
 .profile-user-detail {
     width: min(100% - 20px, 800px);
