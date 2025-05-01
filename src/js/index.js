@@ -26,21 +26,21 @@ async function loadPost() {
     const postList = await getAllPost();
     for (const post of postList.docs) {
         const user = await getUserById(post.data().UserId);
-        await addUserPost(post, user.data());        
+        await addUserPost(post, user);        
     }
 }
 
-async function addUserPost(postDoc, user) {
+async function addUserPost(postDoc, userDoc) {
     const postBox = newElementClass('div', 'post-box');
     const likeList = await getPostLikes(postDoc.id);
     const post = postDoc.data();
-
+    const user = userDoc.data()
     postBox.innerHTML = `
         <div class="post-header">
             <div class="profile">
                 ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
             </div>
-            <p class='user-post-name'>${user.Name}</p>
+            <a class="user-post-name" href="./userProfile.html?userId=${userDoc.id}">${user.Name}</a>
         </div>    
         <p class="post-text">${post.Description}</p>  
         ${post.Photo == '' ? '' : `<img src="${toImage(post.Photo)}">`}
@@ -92,7 +92,7 @@ listen(postBtn, 'click', async () => {
         let image = await toBase64(postImage.files[0]);
         let description = postText.value;
         let newPostId = await newPost(id, description, image);
-        
+
         const user = await getUserById(id);
         const postDoc = await getPostById(newPostId.id);
         await addUserPost(postDoc, user.data());

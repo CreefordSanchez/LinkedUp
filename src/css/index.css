@@ -169,6 +169,10 @@ main {
     gap: 10px;
 }
 
+.user-post-name {
+    color: var(--app-white);
+}
+
 .post-text, .like-counter{
     margin: 5px 14px;
 }
