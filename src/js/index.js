@@ -37,7 +37,9 @@ async function addUserPost(postDoc, user) {
 
     postBox.innerHTML = `
         <div class="post-header">
-            <div class="profile" style="background-image: url(${toImage(user.ProfilePicture)});"></div>
+            <div class="profile">
+                ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
+            </div>
             <p class='user-post-name'>${user.Name}</p>
         </div>    
         <p class="post-text">${post.Description}</p>  
@@ -60,7 +62,9 @@ async function loadUserHeader() {
     let userId = document.cookie.split('=')[1];
     const user = await getUserById(userId);
     userHeader.innerHTML = `
-    <div class="profile" style="background-image: url(${toImage(user.data().ProfilePicture)})"></div>
+    <div class="profile">
+        ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
+    </div>
     <p>${user.data().Name}</p>`;
 }
 

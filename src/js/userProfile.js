@@ -1,6 +1,6 @@
 'use strict';
 
-import { listen, select, newElementClass, toImage, style } from "./data/utility.js";
+import { listen, select, newElementClass, toImage, style, getCookieUser } from "./data/utility.js";
 import { getUserPosts } from "./service/postService.js";
 import { getPostLikes } from "./service/postLikeService.js";
 import { getUserById } from "./service/userService.js";
@@ -25,13 +25,41 @@ async function loadMainContent () {
     if (userId == null) {
         window.location.href = './index.html';
     }
+    await showCreatePost(userId);
     await loadUserHeader(userId);
     await loadPost(userId);
 }
 
+async function showCreatePost(userId) {
+    if (getCookieUser() == userId) {
+        const user = await getUserById(getCookieUser());
+
+        postContainer.innerHTML = `
+        <div class="create-post-box padding-around">
+                    <div class="mock-input-box flex">
+                        <div class="profile">
+                            ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
+                        </div>
+                        <div class="show-create-form input-create flex-center">
+                            <p>Something in mind?</p>
+                        </div>
+                    </div>
+                    <div class="mock-create-btn flex-between flex-align-center">
+                        <div class="show-create-form img-button flex-align-center">                                
+                            <i class="fa-solid fa-image"></i>
+                            <p>Image</p>
+                        </div>
+                        <div class="show-create-form post-button">
+                            <p>Post</p>
+                        </div>
+                    </div>
+                </div>`
+    }
+}
+
 async function loadPost(userId) {
     const postList = await getUserPosts(userId);
-
+    
     for (const post of postList.docs) {
         const user = await getUserById(post.data().UserId);
         await addUserPost(post, user.data());        
@@ -46,7 +74,7 @@ async function addUserPost(postDoc, user) {
     postBox.innerHTML = `
         <div class="post-header">
             <div class="profile">
-                <img src="${toImage(user.ProfilePicture)}">
+                ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
             </div>
             <p class='user-post-name'>${user.Name}</p>
         </div>    
@@ -66,16 +94,20 @@ async function addUserPost(postDoc, user) {
     postContainer.append(postBox);
 }
 
-async function loadUserHeader() {
+async function loadUserHeader(userViewId) {
+    const userView = await getUserById(userViewId);
+    if (userView == null) {
+        window.location.href = './index.html';
+    }
+    
     let userId = document.cookie.split('=')[1];
     const user = await getUserById(userId);
-
     userHeader.innerHTML = `
     <div class="profile">
-        <img src="${toImage(user.data().ProfilePicture)}">
+        ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
     </div>
     <p>${user.data().Name}</p>`;
 
-    console.log(userPicture);
-    userPicture.src = toImage(user.data().ProfilePicture);
+    userPicture.src = toImage(userView.data().ProfilePicture);
+
 }
