@@ -27,8 +27,8 @@ async function loadMainContent () {
     if (userId == null) {
         window.location.href = './index.html';
     }
-    await showCreatePost(userId);
     await loadUserHeader(userId);
+    await showCreatePost(userId);
     await loadPost(userId);
 }
 
@@ -63,7 +63,7 @@ async function loadPost(userId) {
     const postList = await getUserPosts(userId);
     
     userPostCount.innerText = `${postList.size} Post`;
-    
+
     for (const post of postList.docs) {
         const user = await getUserById(post.data().UserId);
         await addUserPost(post, user.data());        
@@ -100,7 +100,8 @@ async function addUserPost(postDoc, user) {
 
 async function loadUserHeader(userViewId) {
     const userView = await getUserById(userViewId);
-    if (userView == null) {
+    
+    if (userView.data() == null) {
         window.location.href = './index.html';
     }
     
