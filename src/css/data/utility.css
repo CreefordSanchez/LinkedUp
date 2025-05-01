@@ -109,3 +109,9 @@
 .scroll-hidden::-webkit-scrollbar {
   display: none; 
 }
+
+.remove-post-box-create {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+}

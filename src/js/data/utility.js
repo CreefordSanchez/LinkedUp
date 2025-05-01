@@ -47,8 +47,8 @@ export function newElement(tag) {
     return document.createElement(tag);
 }
 
-export function giveClass(name) {
-    return this.classList.add(name);
+export function giveClass(element, name) {
+    element.classList.add(name);
 }
 
 export function newElementClass(type, name) {

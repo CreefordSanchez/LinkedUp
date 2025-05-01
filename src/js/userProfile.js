@@ -1,6 +1,6 @@
 'use strict';
 
-import { listen, select, newElementClass, toImage, style, getCookieUser } from "./data/utility.js";
+import { listen, select, newElementClass, toImage, style, getCookieUser, selectAll, giveClass } from "./data/utility.js";
 import { getUserPosts } from "./service/postService.js";
 import { getPostLikes } from "./service/postLikeService.js";
 import { getUserById } from "./service/userService.js";
@@ -13,6 +13,7 @@ const postContainer = select('.scrolling-container');
 const userPicture = select('.profile-user-detail .profile img');
 const userName = select('.user-name');
 const userPostCount = select('.user-post-count');
+const createPostBox = select('.create-post-box');
 
 listen(window, 'load', async () => {
     if (document.cookie == '') {
@@ -37,27 +38,8 @@ async function loadMainContent () {
 async function showCreatePost(userId) {
     if (getCookieUser() == userId) {
         const user = await getUserById(getCookieUser());
-
-        postContainer.innerHTML = `
-        <div class="create-post-box padding-around">
-                    <div class="mock-input-box flex">
-                        <div class="profile">
-                            ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
-                        </div>
-                        <div class="show-create-form input-create flex-center">
-                            <p>Something in mind?</p>
-                        </div>
-                    </div>
-                    <div class="mock-create-btn flex-between flex-align-center">
-                        <div class="show-create-form img-button flex-align-center">                                
-                            <i class="fa-solid fa-image"></i>
-                            <p>Image</p>
-                        </div>
-                        <div class="show-create-form post-button">
-                            <p>Post</p>
-                        </div>
-                    </div>
-                </div>`
+    } else {
+        giveClass(createPostBox, 'remove-post-box-create');
     }
 }
 
@@ -118,6 +100,103 @@ async function loadUserHeader(userViewId) {
     userPicture.src = toImage(userView.data().ProfilePicture);
     userName.innerText = userView.data().Name;
 }
+
+//mock create form 
+const showCreate = selectAll('.show-create-form');
+
+showCreate.forEach(btn => {
+    listen(btn, 'click', () => {
+        closeForm(false);
+    });
+});
+
+//Add new post form
+const closeCreate = select('.close-create-form');
+const createForm = select('.create-post-form-container');
+const postImage = select('.post-image');
+const postText = select('.post-description');
+const imageBox = select('.select-image-box');
+const addImageLogo = select('.select-image-logo');
+const postBtn = select('.post-btn');
+
+listen(postBtn, 'click', async () => {
+    if (postText.value != '') {        
+        let id = document.cookie.split('=')[1];
+        let image = await toBase64(postImage.files[0]);
+        let description = postText.value;
+        let newPostId = await newPost(id, description, image);
+
+        const user = await getUserById(id);
+        const postDoc = await getPostById(newPostId.id);
+        await addUserPost(postDoc, user.data());
+
+        closeCreate.click();
+    }
+});
+
+listen(postText, 'input', () => {
+    if (postText.value == '') {
+        validButton(false);
+    } else {
+        validButton(true);
+    }
+});
+
+listen(postImage, 'change', () => {
+    const file = postImage.files[0];
+
+    if (file != null) {
+        const reader = new FileReader();
+        reader.onload = (item) => {
+            if (validImage(item.target.result)) {                
+                style(imageBox, 'backgroundImage', `url(${item.target.result})`);
+                style(addImageLogo, 'display', 'none');
+            } else {
+                postImage.value = '';
+            }
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
+listen(closeCreate, 'click', () => {
+    postText.value = '';
+    closeForm(true);
+});
+
+function validImage(img) {
+    const data = img.split(';')[0];
+    const type = data.split('/')[1];
+    
+    switch (type) {
+        case 'jpeg':
+        case 'jpg':
+        case 'png':
+            return true;
+        default:
+            return false;
+    }
+}
+
+function validButton(isValid) {
+    if (isValid) {
+        style(postBtn, 'backgroundColor', '#bb00bb');
+    } else {
+        style(postBtn, 'backgroundColor', '#6d006d');
+    }
+}
+
+function closeForm(remove) {
+    if (remove) {
+        style(imageBox, 'backgroundImage', 'none');
+        style(addImageLogo, 'display', 'inline');
+        style(createForm, 'display', 'none');
+    } else {
+        style(createForm, 'display', 'flex');
+    }
+} 
+
 
 //Handle like/comment Action by target
 listen(postContainer, 'click', async(e) => {
