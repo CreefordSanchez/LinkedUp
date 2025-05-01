@@ -1,10 +1,9 @@
 'use strict';
 
-import { listen, select, newElementClass, toImage, style, getCookieUser, selectAll, giveClass } from "./data/utility.js";
-import { getUserPosts } from "./service/postService.js";
-import { getPostLikes } from "./service/postLikeService.js";
+import { listen, select, newElementClass, toImage, style, getCookieUser, selectAll, giveClass, toBase64 } from "./data/utility.js";
+import { getUserPosts, newPost, getPostById } from "./service/postService.js";
+import { getPostLikes, addUserLikePost } from "./service/postLikeService.js";
 import { getUserById } from "./service/userService.js";
-import { addUserLikePost } from "./service/postLikeService.js";
 import { getAllPostComment, addPostComment } from "./service/postCommentService.js";
 
 //Load content
