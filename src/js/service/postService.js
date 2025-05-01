@@ -6,7 +6,7 @@ const db = getFirestore();
 const ref = collection(db, 'Posts');
 
 export async function newPost(userId, description, photo) {
-    await addDoc(ref, {
+    return await addDoc(ref, {
         UserId: userId,
         Description: description,
         Photo: photo == null ? '' : photo
@@ -18,7 +18,7 @@ export async function getAllPost() {
 }
 
 export async function getPostById(id) {
-    return await getDoc(db, 'Posts', id);
+    return await getDoc(doc(db, 'Posts', id));
 }
 
 export async function getUserPosts(userId) {

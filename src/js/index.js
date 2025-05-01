@@ -32,8 +32,8 @@ async function loadPost() {
 
 async function addUserPost(postDoc, user) {
     const postBox = newElementClass('div', 'post-box');
-    const post = typeof postDoc?.data == 'function' ? postDoc.data() : postDoc;
     const likeList = await getPostLikes(postDoc.id);
+    const post = postDoc.data();
 
     postBox.innerHTML = `
         <div class="post-header">
@@ -91,16 +91,11 @@ listen(postBtn, 'click', async () => {
         let id = document.cookie.split('=')[1];
         let image = await toBase64(postImage.files[0]);
         let description = postText.value;
-        await newPost(id, description, image);
+        let newPostId = await newPost(id, description, image);
+        
         const user = await getUserById(id);
-
-        await addUserPost({
-            UserId: id,
-            Photo: image == null ? '' : image,
-            Description: description,
-            Likes: 0,
-
-        }, user.data());
+        const postDoc = await getPostById(newPostId.id);
+        await addUserPost(postDoc, user.data());
 
         closeCreate.click();
     }
