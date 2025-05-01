@@ -38,7 +38,7 @@ async function showCreatePost(userId) {
         <div class="create-post-box padding-around">
                     <div class="mock-input-box flex">
                         <div class="profile">
-                            ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
+                            ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
                         </div>
                         <div class="show-create-form input-create flex-center">
                             <p>Something in mind?</p>
