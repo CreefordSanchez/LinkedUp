@@ -49,6 +49,10 @@
     padding-top: 30px;
 }
 
+.pad-top-15 {
+    padding-top: 15px;
+}
+
 .flex-between {
     display: flex;
     justify-content: space-between;
