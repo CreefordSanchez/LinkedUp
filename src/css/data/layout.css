@@ -38,3 +38,15 @@ nav a {
     align-items: center;
     color: var(--app-white);
 }
+
+.profile {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-color: var(--app-white);
+    overflow: hidden;
+}
+
+.profile img {
+    width: 100%;
+}
