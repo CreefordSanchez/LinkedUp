@@ -50,3 +50,7 @@ nav a {
 .profile img {
     width: 100%;
 }
+
+.current-page-nav {
+    color: var(--app-purple);
+}
