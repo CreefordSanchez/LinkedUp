@@ -25,6 +25,7 @@
 .edit-profile {
     background-color: var(--app-gray);
     color: var(--app-white);
+    height: 48px;
 }
 
 .user-counter {

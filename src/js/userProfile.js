@@ -9,6 +9,8 @@ import { getUserById } from "./service/userService.js";
 const userHeader = select('.user-profile-header');
 const postContainer = select('.scrolling-container');
 const userPicture = select('.profile-user-detail .profile img');
+const userName = select('.user-name');
+const userPostCount = select('.user-post-count');
 
 listen(window, 'load', async () => {
     if (document.cookie == '') {
@@ -60,6 +62,8 @@ async function showCreatePost(userId) {
 async function loadPost(userId) {
     const postList = await getUserPosts(userId);
     
+    userPostCount.innerText = `${postList.size} Post`;
+    
     for (const post of postList.docs) {
         const user = await getUserById(post.data().UserId);
         await addUserPost(post, user.data());        
@@ -109,5 +113,5 @@ async function loadUserHeader(userViewId) {
     <p>${user.data().Name}</p>`;
 
     userPicture.src = toImage(userView.data().ProfilePicture);
-
+    userName.innerText = userView.data().Name;
 }
