@@ -9,6 +9,7 @@ import { addPostComment, getAllPostComment } from './service/postCommentService.
 //Load content
 const userHeader = select('.user-profile-header');
 const postContainer = select('.scrolling-container');
+const headerFriendBtn = select('.friend-nav-button');
 
 listen(window, 'load', async () => {
     if (document.cookie == '') {
@@ -66,6 +67,10 @@ async function loadUserHeader() {
         ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
     </div>
     <a class="user-post-name" href="./userProfile.html?userId=${userId}">${user.data().Name}</a>`;
+
+    headerFriendBtn.innerHTML = `
+        <a href="./friends.html?userId=${userId}"><i class="fa-solid fa-user-group"></i></a>
+    `;
 }
 
 //mock create form 

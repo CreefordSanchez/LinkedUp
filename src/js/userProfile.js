@@ -13,6 +13,7 @@ const userPicture = select('.profile-user-detail .profile img');
 const userName = select('.user-name');
 const userPostCount = select('.user-post-count');
 const createPostBox = select('.create-post-box');
+const headerFriendBtn = select('.friend-nav-button');
 
 listen(window, 'load', async () => {
     if (document.cookie == '') {
@@ -95,6 +96,10 @@ async function loadUserHeader(userViewId) {
         ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
     </div>
     <p>${user.data().Name}</p>`;
+
+    headerFriendBtn.innerHTML = `
+        <a href="./friends.html?userId=${userId}"><i class="fa-solid fa-user-group"></i></a>
+    `;
 
     userPicture.src = toImage(userView.data().ProfilePicture);
     userName.innerText = userView.data().Name;
