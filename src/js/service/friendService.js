@@ -14,10 +14,21 @@ export async function editFriend(id, friend) {
 }
 
 export async function getFriendByTwoId(senderId, recieverId) {
-    const friend = await getDocs(query(ref, 
-        where('SenderId', '==', senderId), 
+    const friend = await getDocs(query(ref,
+        where('SenderId', '==', senderId),
         where('RecieverId', '==', recieverId)));
-        
+
     return friend.docs[0];
 }
 
+export async function deleteFriend(id) {
+    await deleteDoc(doc(db, 'Friends', id));
+}
+
+export async function getAllUserRequest(userId) {
+    return await getDocs(query(ref, where('RecieverId', '==', userId)));
+}
+
+export async function getAllUserRequested(userId) {
+    return await getDocs(query(ref, where('SenderId', '==', userId)));
+}

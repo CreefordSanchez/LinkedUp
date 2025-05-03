@@ -1,126 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LinkedUp</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="./src/css/index.css" media="all">
-        <script src="./src/js/service/firestore.js" type="module"></script>
-        <script src="./src/js/index.js" type="module"></script>
-    </head>
-    <body>
-        <main>
-            <header>
-                <div class="container header-content">
-                    <h1>LinkedUp</h1>
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="./index.html"><i class="fa-solid fa-house current-page-nav"></i></a>
-                            </li>
-                            <li class="friend-nav-button">
-                                <a href="./friends.html"><i class="fa-solid fa-user-group"></i></a>
-                            </li>
-                            <li>
-                                <a href="./"><i class="fa-solid fa-message"></i></a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="user-profile-header">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedUp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./src/css/index.css" media="all">
+    <script src="./src/js/service/firestore.js" type="module"></script>
+    <script src="./src/js/index.js" type="module"></script>
+</head>
+
+<body>
+    <main>
+        <header>
+            <div class="container header-content">
+                <h1>LinkedUp</h1>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="./index.html"><i class="fa-solid fa-house current-page-nav"></i></a>
+                        </li>
+                        <li class="friend-nav-button">
+                            <a href="./friends.html"><i class="fa-solid fa-user-group"></i></a>
+                        </li>
+                        <li>
+                            <a href="./"><i class="fa-solid fa-message"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="user-profile-header">
+                </div>
+            </div>
+        </header>
+        <div class="main-page-content">
+            <section class="left-side-container">
+                <div class="chat-list-header flex-align-center flex-between">
+                    <h3 class="h3-size">Friend Chats</h3>
+                    <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="chat-list">
+                </div>
+            </section>
+
+            <section class="scrolling-container scroll-hidden">
+                <div class="create-post-box padding-around">
+                    <div class="mock-input-box flex">
+                        <div class="create-pf"></div>
+                        <div class="show-create-form input-create flex-center">
+                            <p>Something in mind?</p>
+                        </div>
+                    </div>
+                    <div class="mock-create-btn flex-between flex-align-center">
+                        <div class="show-create-form img-button flex-align-center">
+                            <i class="fa-solid fa-image"></i>
+                            <p>Image</p>
+                        </div>
+                        <div class="show-create-form post-button">
+                            <p>Post</p>
+                        </div>
                     </div>
                 </div>
-            </header>
-            <div class="main-page-content">
-                <section class="left-side-container">
-                    <div class="chat-list-header flex-align-center flex-between">
-                        <h3 class="h3-size">Friend Chats</h3>
-                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                    </div>
-                    <div class="chat-list">
-                    </div>
-                </section>
+            </section>
 
-                <section class="scrolling-container scroll-hidden">
-                    <div class="create-post-box padding-around">
-                        <div class="mock-input-box flex">
-                            <div class="create-pf"></div>
-                            <div class="show-create-form input-create flex-center">
-                                <p>Something in mind?</p>
-                            </div>
-                        </div>
-                        <div class="mock-create-btn flex-between flex-align-center">
-                            <div class="show-create-form img-button flex-align-center">                                
-                                <i class="fa-solid fa-image"></i>
-                                <p>Image</p>
-                            </div>
-                            <div class="show-create-form post-button">
-                                <p>Post</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <section class="right-side-container">
+                <div class="friend-list-header flex-between">
+                    <h3 class="h3-size">Contact</h3>
+                    <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="friend-list">
+                </div>
+            </section>
+        </div>
 
-                <section class="right-side-container">
-                    <div class="friend-list-header flex-between">
-                        <h3 class="h3-size">Contact</h3>
-                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                    </div>
-                    <div class="friend-list">
-                    </div>
-                </section>
-            </div>
-
-            <div class="create-post-form-container flex-center">
-                <div class="create-post-form padding-around border-10">
-                    <div class="create-header flex-center">                        
-                        <h2>Create Post</h2>
-                        <button class="close-create-form flex-center">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </div>
-                    <div class="create-input">
-                        <div class="create-user-profile gap-10 flex-align-center">
-                            <div class="profile"></div>
-                            <p class="user-name">Example</p>
-                        </div>
-                        <form>
-                            <textarea placeholder="Enter text here" class="post-description"></textarea>
-                            <div class="select-image-box flex-center">
-                                <div class="select-image-logo">
-                                    <i class="fa-solid fa-images profile flex-center"></i>
-                                    <p>Add Image</p>
-                                </div>
-                                <input class="post-image" type="file">
-                            </div>
-                        </form>
-                    </div>  
-                    <button type="button" class="post-btn">Post</button>                                                      
-                </div>                           
-            </div>
-
-            <div class="comment-post-container flex-center">
-                <div class="comment-post padding-around border-10">
-                    <div class="comment-post-header">
-                        <h2 class="post-name">Comment Post</h2>
-                        <button class="close-comment-post flex-center">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </div>
-                    <div class="comment-list">
-                    </div>
-                    <form class="comment-input-form flex gap-10">
+        <div class="create-post-form-container flex-center">
+            <div class="create-post-form padding-around border-10">
+                <div class="create-header flex-center">
+                    <h2>Create Post</h2>
+                    <button class="close-create-form flex-center">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                </div>
+                <div class="create-input">
+                    <div class="create-user-profile gap-10 flex-align-center">
                         <div class="profile"></div>
-                        <div class="new-comment-box border-10">
-                            <textarea class="user-comment-input"></textarea>
-                            <button type="button" class="post-comment"><i class="fa-solid fa-paper-plane"></i></button>
+                        <p class="user-name">Example</p>
+                    </div>
+                    <form>
+                        <textarea placeholder="Enter text here" class="post-description"></textarea>
+                        <div class="select-image-box flex-center">
+                            <div class="select-image-logo">
+                                <i class="fa-solid fa-images profile flex-center"></i>
+                                <p>Add Image</p>
+                            </div>
+                            <input class="post-image" type="file">
                         </div>
                     </form>
                 </div>
+                <button type="button" class="post-btn">Post</button>
             </div>
-        </main>
-    </body>
+        </div>
+
+        <div class="comment-post-container flex-center">
+            <div class="comment-post padding-around border-10">
+                <div class="comment-post-header">
+                    <h2 class="post-name">Comment Post</h2>
+                    <button class="close-comment-post flex-center">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                </div>
+                <div class="comment-list">
+                </div>
+                <form class="comment-input-form flex gap-10">
+                    <div class="profile"></div>
+                    <div class="new-comment-box border-10">
+                        <textarea class="user-comment-input"></textarea>
+                        <button type="button" class="post-comment"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
 </html>

@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LinkedUp</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="./src/css/friends.css" media="all">
-        <script src="./src/js/service/firestore.js" type="module"></script>
-        <script src="./src/js/friends.js" type="module"></script>
-    </head>
-    <body>
-        <header>
-            <div class="container header-content">
-                <h1>LinkedUp</h1>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="./index.html"><i class="fa-solid fa-house"></i></a>
-                        </li>
-                        <li>
-                            <a><i class="fa-solid fa-user-group current-page-nav"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa-solid fa-message"></i></a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="user-profile-header">
-                </div>
-            </div>
-        </header>
 
-        <div class="flex">
-            <section class="friends-nav-tab padding-around">
-                <h2>Friends</h2>
-                <div class="friend-nav-buttons">
-                    <button class="show-home flex flex-align-center pad-top-15">
-                        <i class="fa-solid fa-house flex-center"></i>
-                        Home
-                    </button>
-                    <button class="show-friends flex flex-align-center pad-top-15">
-                        <i class="fa-solid fa-house flex-center"></i>
-                        Friends
-                    </button>
-                    <button class="show-request flex flex-align-center pad-top-15">
-                        <i class="fa-solid fa-house flex-center"></i>
-                        Friend Request
-                    </button>
-                    <button class="show-requested flex flex-align-center pad-top-15">
-                        <i class="fa-solid fa-house flex-center"></i>
-                        Friend Requested
-                    </button>
-                </div>                
-            </section>
-            
-            <section class="display-people padding-around">
-                <div class="display-header">
-                    <h2>Example</h2>
-                </div>
-                <div class="display-list pad-top-15">
-                    
-                </div>
-            </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedUp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./src/css/friends.css" media="all">
+    <script src="./src/js/service/firestore.js" type="module"></script>
+    <script src="./src/js/friends.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>LinkedUp</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="./index.html"><i class="fa-solid fa-house"></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fa-solid fa-user-group current-page-nav"></i></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa-solid fa-message"></i></a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile-header">
+            </div>
         </div>
-    </body>
+    </header>
+
+    <div class="flex">
+        <section class="friends-nav-tab padding-around">
+            <h2>Friends</h2>
+            <div class="friend-nav-buttons">
+                <button class="show-new-friends flex flex-align-center pad-top-15">
+                    <i class="fa-solid fa-house flex-center"></i>
+                    New People
+                </button>
+                <button class="show-friends flex flex-align-center pad-top-15">
+                    <i class="fa-solid fa-house flex-center"></i>
+                    Friends
+                </button>
+                <button class="show-request flex flex-align-center pad-top-15">
+                    <i class="fa-solid fa-house flex-center"></i>
+                    Friend Request
+                </button>
+                <button class="show-requested flex flex-align-center pad-top-15">
+                    <i class="fa-solid fa-house flex-center"></i>
+                    Friend Requested
+                </button>
+            </div>
+        </section>
+
+        <section class="display-people padding-around">
+            <div class="display-header">
+                <h2>Example</h2>
+            </div>
+            <div class="display-list pad-top-15">
+
+            </div>
+        </section>
+    </div>
+</body>
+
 </html>
