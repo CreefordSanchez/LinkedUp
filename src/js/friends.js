@@ -113,30 +113,42 @@ async function displayFriends() {
         for (const friend of requestList) {
             await displayUser(friend, friend.data().RecieverId);
         }
-    }
-
-    if (getRequested.size > 0) {
+    } else if (getRequested.size > 0) {
         const requestedList = getRequested.docs.filter(friend => !friend.data.IsAccepted);
 
         for (const friend of requestedList) {
             await displayUser(friend, friend.data().SenderId);
         }
+    } else {
+        displayList.innerHTML = '<h1>No Send Friend Request</h1>'
     }
 }
 
 
-listen(requestBtn, 'click', () => {
+listen(requestBtn, 'click', async () => {
     displayList.innerHTML = '';
     newFriendsBtn.disabled = false;
-    friendsBtn.disabled = true;
+    friendsBtn.disabled = false;
     requestBtn.disabled = true;
-    requestedBtn.disabled = true;
+    requestedBtn.disabled = false;
+
+    await displayRequest();
 });
 
 async function displayRequest() {
     let userId = getCookieUser();
+    const getRequestList = await getAllUserRequest(userId);
 
+    if (getRequestList.size > 0) {
+        const requestList = getRequestList.docs.filter(friend => !friend.data.IsAccepted);
+        for (const friend of requestList) {
+            await displayUser(friend, friend.data().RecieverId);
+        }
+    } else {
+        displayList.innerHTML = '<h1>No Send Friend Request</h1>'
+    }
 }
+
 async function displayUser(friendDoc, userId) {
     const getUser = await getUserById(userId);
     const user = getUser.data();
@@ -156,10 +168,11 @@ async function displayUser(friendDoc, userId) {
 listen(requestedBtn, 'click', () => {
     displayList.innerHTML = '';
     newFriendsBtn.disabled = false;
-    friendsBtn.disabled = true;
-    requestBtn.disabled = true;
+    friendsBtn.disabled = false;
+    requestBtn.disabled = false;
     requestedBtn.disabled = true;
 });
+
 
 /*Button in UserBox*/
 listen(displayList, 'click', async (e) => {
