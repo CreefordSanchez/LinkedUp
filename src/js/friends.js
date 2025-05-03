@@ -3,7 +3,7 @@
 import { listen, select, newElementClass, toImage, style, getCookieUser, selectAll, giveClass, toBase64 } from "./data/utility.js";
 import { getUserById } from "./service/userService.js";
 import { getAllUser } from "./service/userService.js";
-import { getFriendByTwoId, addFriend, deleteFriend, getAllUserRequested, getAllUserRequest } from "./service/friendService.js";
+import { getFriendByTwoId, addFriend, deleteFriend, getAllUserRequested, getAllUserRequest, getFriendById, editFriend } from "./service/friendService.js";
 
 //Load Content
 const userHeader = select('.user-profile-header');
@@ -55,7 +55,7 @@ listen(newFriendsBtn, 'click', async () => {
     newFriendsBtn.disabled = true;
     friendsBtn.disabled = false;
     requestBtn.disabled = false;
-    requestedBtn.disabled = true;
+    requestedBtn.disabled = false;
 
     await displayNewUserList();
 });
@@ -97,30 +97,39 @@ listen(friendsBtn, 'click', async () => {
     newFriendsBtn.disabled = false;
     friendsBtn.disabled = true;
     requestBtn.disabled = false;
-    requestedBtn.disabled = true;
+    requestedBtn.disabled = false;
 
     await displayFriends();
 });
 
 async function displayFriends() {
     let userId = getCookieUser();
+    let isEmpty = false;
     const getRequest = await getAllUserRequest(userId)
     const getRequested = await getAllUserRequested(userId);
 
     if (getRequest.size > 0) {
-        const requestList = getRequest.docs.filter(friend => !friend.data.IsAccepted);
+        const requestList = getRequest.docs.filter(friend => friend.data.IsAccepted);
+        isEmpty = requestList.size > 0 ? false : true;
 
         for (const friend of requestList) {
             await displayUser(friend, friend.data().RecieverId);
         }
-    } else if (getRequested.size > 0) {
-        const requestedList = getRequested.docs.filter(friend => !friend.data.IsAccepted);
+    }
+
+    if (getRequested.size > 0) {
+        const requestedList = getRequested.docs.filter(friend => friend.data.IsAccepted);
+        isEmpty = requestedList.size > 0 ? false : true;
 
         for (const friend of requestedList) {
             await displayUser(friend, friend.data().SenderId);
         }
     } else {
-        displayList.innerHTML = '<h1>No Send Friend Request</h1>'
+        isEmpty == true;
+    }
+
+    if (isEmpty) {
+        displayList.innerHTML = '<h1>No Friends</h1>'
     }
 }
 
@@ -165,15 +174,45 @@ async function displayUser(friendDoc, userId) {
     displayList.append(userBox);
 }
 
-listen(requestedBtn, 'click', () => {
+listen(requestedBtn, 'click', async () => {
     displayList.innerHTML = '';
     newFriendsBtn.disabled = false;
     friendsBtn.disabled = false;
     requestBtn.disabled = false;
     requestedBtn.disabled = true;
+    await displayRequested();
 });
 
+async function displayRequested() {
+    let userId = getCookieUser();
+    const getRequestedList = await getAllUserRequested(userId);
 
+    if (getRequestedList.size > 0) {
+        const requestedList = getRequestedList.docs.filter(friend => !friend.data.IsAccepted);
+        for (const friend of requestedList) {
+            await displayRequestedUser(friend, friend.data().RecieverId);
+        }
+    } else {
+        displayList.innerHTML = '<h1>No Friend Requested</h1>'
+    }
+}
+
+async function displayRequestedUser(friendDoc, userId) {
+    const getUser = await getUserById(userId);
+    const user = getUser.data();
+    const userBox = newElementClass('div', 'user-box');
+
+    userBox.innerHTML = `
+    <div class="user-image-box" style="background-image: url(${toImage(user.ProfilePicture)})">
+    </div>
+    <div class="name-button">
+        <p class="friend-name">${user.Name}</p>
+        <button class="un-friend-button flex-center border-5" data-id="${friendDoc.id}">Denied Request</button>
+        <button class="add-friend-button flex-center border-5" data-id="${friendDoc.id}">Accept Request</button>
+    </div>`;
+
+    displayList.append(userBox);
+}
 /*Button in UserBox*/
 listen(displayList, 'click', async (e) => {
     const element = e.target;
@@ -199,31 +238,14 @@ listen(displayList, 'click', async (e) => {
 
         style(userBox, 'display', 'none');
     }
+
+    if (element.closest('.add-friend-button')) {
+        const button = element.closest('.add-friend-button');
+        let buttonId = button.dataset.id;
+        const friend = await getFriendById(buttonId);
+        friend.data().IsAccepted = true;
+
+        await editFriend(friend.id, friend);
+        style(userBox, 'display', 'none');
+    }
 });
-
-async function getFriendStatus(userId, friendId) {
-    const request = await getFriendByTwoId(userId, friendId);
-    if (request != null) {
-        return request.data().IsAccepted;
-    }
-
-    const requested = await getFriendByTwoId(friendId, userId);
-    if (requested != null) {
-        return requested.data().IsAccepted;
-    }
-
-    return null;
-}
-
-function editButtonType(button, type) {
-    const dataId = button.dataset.id.split('/');
-    const newDataId = `${dataId[0]}/${type}`;
-
-    button.dataset.id = newDataId;
-
-    if (type) {
-        button.innerText = 'Remove Friend';
-    } else {
-        button.innerText = 'Add Friend';
-    }
-}
