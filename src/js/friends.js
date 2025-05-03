@@ -14,8 +14,7 @@ listen(window, 'load', async () => {
         window.location.href = './loggin.html';
     }
 
-    //await loadMainContent();
-    await displayFriends();
+    await loadMainContent();
 });
 
 async function loadMainContent() {
@@ -112,7 +111,7 @@ async function displayFriends() {
         const requestList = getRequest.docs.filter(friend => !friend.data.IsAccepted);
 
         for (const friend of requestList) {
-            await displayUser(friend, friend.data().SenderId);
+            await displayUser(friend, friend.data().RecieverId);
         }
     }
 
@@ -120,11 +119,24 @@ async function displayFriends() {
         const requestedList = getRequested.docs.filter(friend => !friend.data.IsAccepted);
 
         for (const friend of requestedList) {
-            await displayUser(friend, friend.data().RecieverId);
+            await displayUser(friend, friend.data().SenderId);
         }
     }
 }
 
+
+listen(requestBtn, 'click', () => {
+    displayList.innerHTML = '';
+    newFriendsBtn.disabled = false;
+    friendsBtn.disabled = true;
+    requestBtn.disabled = true;
+    requestedBtn.disabled = true;
+});
+
+async function displayRequest() {
+    let userId = getCookieUser();
+
+}
 async function displayUser(friendDoc, userId) {
     const getUser = await getUserById(userId);
     const user = getUser.data();
@@ -140,14 +152,6 @@ async function displayUser(friendDoc, userId) {
 
     displayList.append(userBox);
 }
-
-listen(requestBtn, 'click', () => {
-    displayList.innerHTML = '';
-    newFriendsBtn.disabled = false;
-    friendsBtn.disabled = true;
-    requestBtn.disabled = true;
-    requestedBtn.disabled = true;
-});
 
 listen(requestedBtn, 'click', () => {
     displayList.innerHTML = '';

@@ -25,10 +25,10 @@ export async function deleteFriend(id) {
     await deleteDoc(doc(db, 'Friends', id));
 }
 
-export async function getAllUserRequest(userId) {
+export async function getAllUserRequested(userId) {
     return await getDocs(query(ref, where('RecieverId', '==', userId)));
 }
 
-export async function getAllUserRequested(userId) {
+export async function getAllUserRequest(userId) {
     return await getDocs(query(ref, where('SenderId', '==', userId)));
 }
