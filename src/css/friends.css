@@ -17,6 +17,11 @@
     border-radius: 18px;
 }
 
+.friend-nav-buttons button {
+    background-color: var(--app-no-color);
+    color: var(--app-white);
+    gap: 5px;
+}
 
 /*Friend List*/
 .display-people {
@@ -39,15 +44,19 @@
     background-color: var(--app-gray);
     overflow: hidden;
     border: 1px solid var(--app-white);
+    border-radius: 5px;
 }
 
 .user-image-box {
     height: 211px;
     background-color: var(--app-white);
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
 }
 
 .name-button {
-    padding: 6px 12px;
+    padding: 12px;
 }
 
 .name-button p {
