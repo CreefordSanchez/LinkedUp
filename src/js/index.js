@@ -12,14 +12,11 @@ const postContainer = select('.scrolling-container');
 const headerFriendBtn = select('.friend-nav-button');
 
 listen(window, 'load', async () => {
-    if (document.cookie == '') {
-        window.location.href = './loggin.html';
-    }  
     await loadMainContent();    
 });
 
 async function loadMainContent () {
-    await loadUserHeader();
+    //await loadUserHeader();
     await loadPost();
 }
 
