@@ -18,14 +18,8 @@
     border-bottom: solid 1px var(--app-gray);
 }
 
-.create-pf {
+.input-create {    
     height: 40px;
-    min-width: 40px;
-    border-radius: 20px;
-    background-color: var(--app-black);
-}
-
-.input-create {
     width: 100%;
     background-color: var(--app-gray);
     border-radius: 15px;
