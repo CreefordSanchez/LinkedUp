@@ -8,6 +8,7 @@ import { getAllUserRequest, getAllUserRequested } from "./service/friendService.
 
 const createPostBox = select('.create-post-box');
 const postContainer = select('.scrolling-container');
+const userName = select('.user-name');
 const userPostCount = select('.user-post-count');
 const userFriendtCount = select('.user-friend-count');
  
@@ -24,9 +25,20 @@ async function loadMainContent () {
         window.location.href = './index.html';
     }
     
+    await isUserNotFound(userId);
     await showCreatePost(userId);
     await showFriendCount(userId);
     await loadPost(userId);
+}
+
+async function isUserNotFound(userId) {
+    const user = await getUserById(userId);
+
+    if (user == null) {
+        window.location.href = './index.html';
+    } else {
+        userName.innerText = `${user.data().Name}`;
+    }
 }
 
 async function showFriendCount(userId) {
@@ -49,11 +61,9 @@ async function showFriendCount(userId) {
 }
 
 async function showCreatePost(userId) {
-    if (getCookieUser() == userId) {
-        const user = await getUserById(getCookieUser());
-    } else {
+    if (getCookieUser() != userId) {
         giveClass(createPostBox, 'remove-post-box-create');
-    }
+    } 
 }
 
 async function loadPost(userId) {
