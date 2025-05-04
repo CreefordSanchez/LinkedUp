@@ -4,11 +4,13 @@ import { listen, select, getCookieUser, giveClass, newElementClass, toImage, sty
 import { getUserById } from "./service/userService.js";
 import { getUserPosts, deletePost } from "./service/postService.js";
 import { getPostLikes } from "./service/postLikeService.js";
+import { getAllUserRequest, getAllUserRequested } from "./service/friendService.js";
 
-//Show Create
 const createPostBox = select('.create-post-box');
-const userPostCount = select('.user-post-count');
 const postContainer = select('.scrolling-container');
+const userPostCount = select('.user-post-count');
+const userFriendtCount = select('.user-friend-count');
+ 
 
 listen(window, 'load', async () => {    
     await loadMainContent();    
@@ -23,7 +25,27 @@ async function loadMainContent () {
     }
     
     await showCreatePost(userId);
+    await showFriendCount(userId);
     await loadPost(userId);
+}
+
+async function showFriendCount(userId) {
+    const getRequest = await getAllUserRequest(userId)
+    const getRequested = await getAllUserRequested(userId);
+    let count = 0;
+
+    if (getRequest.size > 0) {
+        const requestList = getRequest.docs.filter(friend => friend.data.IsAccepted);
+        count += requestList.length;
+    }
+
+    if (getRequested.size > 0) {
+        const requestedList = getRequested.docs.filter(friend => friend.data.IsAccepted);
+        console.log(requestedList.size);
+        count += requestedList.length;
+    } 
+
+    userFriendtCount.innerText = `${count} Friends`;
 }
 
 async function showCreatePost(userId) {
