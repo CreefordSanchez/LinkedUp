@@ -46,3 +46,16 @@
     width: min(100% - 20px, 1000px);
     margin-inline: auto;
 }
+
+.post-header {
+    position: relative;
+    width: 100%;
+}
+
+.delete-post {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}

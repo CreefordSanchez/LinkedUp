@@ -1,8 +1,8 @@
 'use strict';
 
-import { listen, select, getCookieUser, giveClass, newElementClass, toImage } from "./data/utility.js";
+import { listen, select, getCookieUser, giveClass, newElementClass, toImage, style } from "./data/utility.js";
 import { getUserById } from "./service/userService.js";
-import { getUserPosts } from "./service/postService.js";
+import { getUserPosts, deletePost } from "./service/postService.js";
 import { getPostLikes } from "./service/postLikeService.js";
 
 //Show Create
@@ -56,6 +56,7 @@ async function addUserPost(postDoc, user) {
                 ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
             </div>
             <p class='user-post-name'>${user.Name}</p>
+            <i class="fa-solid fa-trash delete-post" data-id="${postDoc.id}"></i>
         </div>    
         <p class="post-text">${post.Description}</p>  
         ${post.Photo == '' ? '' : `<img src="${toImage(post.Photo)}">`}
@@ -72,3 +73,15 @@ async function addUserPost(postDoc, user) {
         </div>`;
     postContainer.append(postBox);
 }
+
+//Delete post
+listen(postContainer, 'click', async (e) => {
+    const element = e.target;
+
+    if (element.closest('.delete-post')) {
+        const post = element.closest('.post-box');
+        await deletePost(element.dataset.id);
+
+        style(post, 'display', 'none');
+    }
+});

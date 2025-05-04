@@ -25,3 +25,7 @@ export async function getUserPosts(userId) {
     if (userId == null) return null;
     return await getDocs(query(ref, where('UserId', '==', userId)));
 }
+
+export async function deletePost(postId) {
+    await deleteDoc(doc(db, 'Posts', postId));
+}
