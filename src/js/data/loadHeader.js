@@ -1,3 +1,5 @@
+'use strict';
+
 import { listen, select, toImage, getCookieUser } from './utility.js';
 import { getUserById } from '../service/userService.js';
 
@@ -5,11 +7,11 @@ import { getUserById } from '../service/userService.js';
 const userHeader = select('.user-profile-header');
 const headerFriendBtn = select('.friend-nav-button');
 
-listen(window, 'load', async () => {
-    if (document.cookie == '') {
-        window.location.href = './loggin.html';
-    }  
+if (document.cookie == '') {
+    window.location.href = './loggin.html';
+}  
 
+listen(window, 'load', async () => {
     await loadUserHeader();  
 });
 
