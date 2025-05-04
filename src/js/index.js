@@ -6,19 +6,12 @@ import { newPost, getAllPost, getPostById } from './service/postService.js';
 import { addUserLikePost, getPostLikes } from './service/postLikeService.js'
 import { addPostComment, getAllPostComment } from './service/postCommentService.js';
 
-//Load content
-const userHeader = select('.user-profile-header');
+//Load Post content
 const postContainer = select('.scrolling-container');
-const headerFriendBtn = select('.friend-nav-button');
 
 listen(window, 'load', async () => {
-    await loadMainContent();    
+    await loadPost(); 
 });
-
-async function loadMainContent () {
-    //await loadUserHeader();
-    await loadPost();
-}
 
 async function loadPost() {
     const postList = await getAllPost();
@@ -54,20 +47,6 @@ async function addUserPost(postDoc, userDoc) {
             </button>
         </div>`;
     postContainer.append(postBox);
-}
-
-async function loadUserHeader() {
-    let userId = document.cookie.split('=')[1];
-    const user = await getUserById(userId);
-    userHeader.innerHTML = `
-    <div class="profile">
-        ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
-    </div>
-    <a class="user-post-name" href="./userProfile.html?userId=${userId}">${user.data().Name}</a>`;
-
-    headerFriendBtn.innerHTML = `
-        <a href="./friends.html?userId=${userId}"><i class="fa-solid fa-user-group"></i></a>
-    `;
 }
 
 //mock create form 
