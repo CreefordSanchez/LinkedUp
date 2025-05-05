@@ -37,12 +37,7 @@ async function loadUserHeader(userViewId) {
 
     let userId = document.cookie.split('=')[1];
     const user = await getUserById(userId);
-    userHeader.innerHTML = `
-    <div class="profile">
-        ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
-    </div>
-    <a class="user-name" href="./userProfile.html?userId=${user.id}">${user.data().Name}</a>`;
-}
+ }
 
 /*Displaying Users*/
 const newFriendsBtn = select('.show-new-friends');

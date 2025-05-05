@@ -1,5 +1,9 @@
 @import url(./utility.css);
 
+main {
+    position: relative;
+}
+
 header {
     background-color: var(--app-black);  
     border-bottom: solid 2px var(--app-gray);  
@@ -53,4 +57,19 @@ nav a {
 
 .current-page-nav {
     color: var(--app-purple);
+}
+
+main {
+    position: relative;
+}
+
+.profile-header-menu {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    height: 100px;
+    width: 220px;
+    background-color: var(--app-black);
+    z-index: 100;
+    display: none;
 }

@@ -55,10 +55,6 @@
     color: var(--app-purple);
 }
 
-main {
-    position: relative;
-}
-
 .create-post-form-container {
     position: fixed;
     top: 0;
