@@ -5,39 +5,11 @@ import { getUserById } from "./service/userService.js";
 import { getAllUser } from "./service/userService.js";
 import { getFriendByTwoId, addFriend, deleteFriend, getAllUserRequested, getAllUserRequest, getFriendById, editFriend } from "./service/friendService.js";
 
-//Load Content
-const userHeader = select('.user-profile-header');
 const displayList = select('.display-list');
 
 listen(window, 'load', async () => {
-    if (document.cookie == '') {
-        window.location.href = './loggin.html';
-    }
-
-    await loadMainContent();
-});
-
-async function loadMainContent() {
-    const pararms = new URLSearchParams(window.location.search);
-    const userId = pararms.get('userId');
-
-    if (userId == null) {
-        window.location.href = './index.html';
-    }
-    await loadUserHeader(userId);
     newFriendsBtn.click();
-}
-
-async function loadUserHeader(userViewId) {
-    const userView = await getUserById(userViewId);
-
-    if (userView.data() == null) {
-        window.location.href = './index.html';
-    }
-
-    let userId = document.cookie.split('=')[1];
-    const user = await getUserById(userId);
- }
+});
 
 /*Displaying Users*/
 const newFriendsBtn = select('.show-new-friends');
