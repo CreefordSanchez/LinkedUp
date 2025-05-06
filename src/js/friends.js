@@ -30,15 +30,15 @@ listen(newFriendsBtn, 'click', async () => {
 async function displayNewUserList() {
     const userList = await getAllUser();
     let userId = getCookieUser();
-
+    
     if (userList.empty) {
-        displayList.innerHTML = '<h1>No new users currently';
+        displayList.innerHTML = '<h1>No new users currently</h1>';
     } else {
         for (const user of userList.docs) {
-            if (user.id != userId) {
-                if (await getFriendByTwoId(userId, user.id) == null) {
-                    displayNewUser(user);
-                }
+            if (user.id != userId 
+                && await getFriendByTwoId(userId, user.id) == null
+                && await getFriendByTwoId(user.id, userId) == null) {
+                displayNewUser(user);
             }
         }
     }
@@ -71,28 +71,26 @@ listen(friendsBtn, 'click', async () => {
 
 async function displayFriends() {
     let userId = getCookieUser();
-    let isEmpty = false;
-    const getRequest = await getAllUserRequest(userId)
-    const getRequested = await getAllUserRequested(userId);
+    let isEmpty = true;
+    const requestList = await getAllUserRequest(userId)
+    const requestedList = await getAllUserRequested(userId);
 
-    if (getRequest.size > 0) {
-        const requestList = getRequest.docs.filter(friend => friend.data.IsAccepted);
-        isEmpty = requestList.size > 0 ? false : true;
-
-        for (const friend of requestList) {
-            await displayUser(friend, friend.data().RecieverId);
+    if (requestList.size > 0) {        
+        for (const friend of requestList.docs) {
+            if (friend.data().IsAccepted) {
+                isEmpty = false;
+                await displayUser(friend, friend.data().RecieverId);
+            }
         }
-    }
+    } 
 
-    if (getRequested.size > 0) {
-        const requestedList = getRequested.docs.filter(friend => friend.data.IsAccepted);
-        isEmpty = requestedList.size > 0 ? false : true;
-
-        for (const friend of requestedList) {
-            await displayUser(friend, friend.data().SenderId);
+    if (requestedList.size > 0) {
+        for (const friend of requestedList.docs) {
+            if (friend.data().IsAccepted) {
+                isEmpty = false;
+                await displayUser(friend, friend.data().SenderId);
+            }        
         }
-    } else {
-        isEmpty == true;
     }
 
     if (isEmpty) {
@@ -113,12 +111,15 @@ listen(requestBtn, 'click', async () => {
 
 async function displayRequest() {
     let userId = getCookieUser();
-    const getRequestList = await getAllUserRequest(userId);
+    let isEmpty = true;
+    const requestList = await getAllUserRequest(userId);
 
-    if (getRequestList.size > 0) {
-        const requestList = getRequestList.docs.filter(friend => !friend.data.IsAccepted);
-        for (const friend of requestList) {
-            await displayUser(friend, friend.data().RecieverId);
+    if (requestList.size > 0) {
+        for (const friend of requestList.docs) {
+            if (!friend.data().IsAccepted) {
+                isEmpty = false;
+                await displayUser(friend, friend.data().RecieverId);
+            }
         }
     } else {
         displayList.innerHTML = '<h1>No Send Friend Request</h1>'
@@ -152,14 +153,19 @@ listen(requestedBtn, 'click', async () => {
 
 async function displayRequested() {
     let userId = getCookieUser();
-    const getRequestedList = await getAllUserRequested(userId);
+    let isEmpty = true;
+    const requestedList = await getAllUserRequested(userId);
 
-    if (getRequestedList.size > 0) {
-        const requestedList = getRequestedList.docs.filter(friend => !friend.data.IsAccepted);
-        for (const friend of requestedList) {
-            await displayRequestedUser(friend, friend.data().RecieverId);
+    if (requestedList.size > 0) {
+        for (const friend of requestedList.docs) {
+            if (!friend.data().IsAccepted) {
+                isEmpty = false;
+                await displayRequestedUser(friend, friend.data().SenderId);
+            }
         }
-    } else {
+    } 
+    
+    if (isEmpty) {
         displayList.innerHTML = '<h1>No Friend Requested</h1>'
     }
 }
@@ -180,6 +186,7 @@ async function displayRequestedUser(friendDoc, userId) {
 
     displayList.append(userBox);
 }
+
 /*Button in UserBox*/
 listen(displayList, 'click', async (e) => {
     const element = e.target;
@@ -209,10 +216,12 @@ listen(displayList, 'click', async (e) => {
     if (element.closest('.add-friend-button')) {
         const button = element.closest('.add-friend-button');
         let buttonId = button.dataset.id;
-        const friend = await getFriendById(buttonId);
-        friend.data().IsAccepted = true;
+        const friendDoc = await getFriendById(buttonId);
+        const friend = friendDoc.data();
+        
+        friend.IsAccepted = true;
 
-        await editFriend(friend.id, friend);
+        await editFriend(friendDoc.id, friend);
         style(userBox, 'display', 'none');
     }
 });

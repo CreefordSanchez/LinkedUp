@@ -13,7 +13,7 @@ export async function editFriend(id, friend) {
     await updateDoc(doc(db, 'Friends', id), friend);
 }
 
-export async function getFriendById(friendId) {
+export async function getFriendById(id) {
     return await getDoc(doc(db, 'Friends', id));
 }
 export async function getFriendByTwoId(senderId, recieverId) {
