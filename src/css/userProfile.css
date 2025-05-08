@@ -4,6 +4,10 @@
 @import url(./data/postBox.css);
 @import url(./data/comment.css);
 
+nav a{
+    color: #6d006d;
+}
+
 .profile-user-detail {
     width: min(100% - 20px, 800px);
     margin-inline: auto;

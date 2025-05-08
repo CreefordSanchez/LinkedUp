@@ -55,9 +55,6 @@ nav a {
     width: 100%;
 }
 
-.current-page-nav {
-    color: var(--app-purple);
-}
 
 main {
     position: relative;

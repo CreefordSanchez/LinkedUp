@@ -4,6 +4,14 @@
 @import url(./data/comment.css);
 @import url(./data/postBox.css);
 
+nav a{
+    color: #6d006d;
+}
+
+.current-page-nav {
+    color: var(--app-purple);
+}
+
 .main-page-content {
     height: calc(100vh - 72px);
     background-color: var(--app-black);
