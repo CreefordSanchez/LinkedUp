@@ -1,0 +1,11 @@
+@import url(./data/reset.css);
+@import url(./data/layout.css);
+@import url(./data/utility.css);
+
+nav a{
+    color: #6d006d;
+}
+
+.chat-nav-button i {
+    color: var(--app-purple);
+}
