@@ -9,3 +9,54 @@ nav a{
 .chat-nav-button i {
     color: var(--app-purple);
 }
+
+/*Friends nav tab*/
+.new-chat {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 19px;
+}
+
+.chat-nav-tab {
+    width: 360px;
+    border-right: 2px solid var(--app-gray);
+    height: calc(100vh - 72px);
+
+}
+
+.chat-room-buttons button {
+    background-color: var(--app-no-color);
+    color: var(--app-white);
+    gap: 5px;
+}
+
+.chat-room {
+    gap: 5px;
+    position: relative;
+}
+
+.delete-chat-room {
+    position: absolute;
+    right: 0;
+    top: 25%;
+}
+
+/*Messenger box*/
+.display-chat {
+    width: 100%;
+}
+
+.messages-list .profile {
+    min-width: 40px;
+}
+
+.reciever-text, .sender-text {
+    max-width: 80%;
+    align-items: start;
+}
+
+.sender-text {
+    justify-content: end;
+    justify-self: end;
+}
