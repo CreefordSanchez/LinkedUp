@@ -70,3 +70,16 @@ main {
     z-index: 100;
     display: none;
 }
+
+.background-floating-screen {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--app-black-transparent);
+    display: none;
+}
+
+.floating-screen {
+    background-color: var(--app-light-gray);
+}

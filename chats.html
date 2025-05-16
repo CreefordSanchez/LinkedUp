@@ -12,58 +12,85 @@
     <script src="./src/js/data/loadHeader.js" type="module"></script>
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <h1>LinkedUp</h1>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="./index.html"><i class="fa-solid fa-house current-page-nav"></i></a>
-                    </li>
-                    <li class="friend-nav-button">
-                        <a><i class="fa-solid fa-user-group"></i></a>
-                    </li>
-                    <li class="chat-nav-button">
-                        <a><i class="fa-solid fa-message"></i></a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="user-profile-header">
-                <div class="profile"></div>
-                <a class="user-post-name"></a>              
-            </div>
-        </div>
-    </header>
-
-    <div class="flex">
-        <section class="chat-nav-tab padding-around">
-            <div class="chat-nav-header flex flex-between">
-                <h2>Friends</h2>
-                <button class="new-chat">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-            </div>
-            <div class="chat-room-buttons pad-top-15">                
-                <div class="chat-list">
-                    
+    <main>
+        <header>
+            <div class="container header-content">
+                <h1>LinkedUp</h1>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="./index.html"><i class="fa-solid fa-house current-page-nav"></i></a>
+                        </li>
+                        <li class="friend-nav-button">
+                            <a><i class="fa-solid fa-user-group"></i></a>
+                        </li>
+                        <li class="chat-nav-button">
+                            <a><i class="fa-solid fa-message"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="user-profile-header">
+                    <div class="profile"></div>
+                    <a class="user-post-name"></a>              
                 </div>
             </div>
-        </section>
-
-        <section class="display-chat padding-around">
-            
-        </section>
-    </div>
+        </header>
     
-    <div class="profile-header-menu padding-around border-10">
-        <a class="view-profile">
-            <i class="fa-solid fa-user"></i>
-            Profile
-        </a>
-        <a class="log-out">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            Log Out
-        </a>
-    </div>
+        <div class="flex">
+            <section class="chat-nav-tab padding-around">
+                <div class="chat-nav-header flex flex-between">
+                    <h2>Friends</h2>
+                    <button class="new-chat">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <div class="chat-room-buttons pad-top-15">                
+                    <div class="chat-list">
+                        
+                    </div>
+                </div>
+            </section>
+    
+            <section class="display-chat padding-around">
+                
+            </section>
+        </div>
+        
+        <div class="profile-header-menu padding-around border-10">
+            <a class="view-profile">
+                <i class="fa-solid fa-user"></i>
+                Profile
+            </a>
+            <a class="log-out">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Log Out
+            </a>
+        </div>
+
+        <div class="background-floating-screen flex-center">
+            <div class="frined-list floating-screen padding-around border-10">
+                <div class="friend-list-header flex-center">
+                    <h2>New Chat Room</h2>
+                    <button class="close-create-form flex-center">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                </div>
+                <div class="new-chat-list">
+                    
+                </div>
+                <form class="chat-room-name-form pad-top-15 flex-align-center">
+                    <div class="profile">
+                        <input class="chat-picture" type="file">
+                    </div> 
+                    <div class="chat-room-name-input border-10 flex-align-center padding-around">
+                        <input type="text" class="chat-name"></textarea>
+                        <button type="button" class="create-chat">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
