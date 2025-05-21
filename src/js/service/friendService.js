@@ -16,6 +16,7 @@ export async function editFriend(id, friend) {
 export async function getFriendById(id) {
     return await getDoc(doc(db, 'Friends', id));
 }
+
 export async function getFriendByTwoId(senderId, recieverId) {
     const friend = await getDocs(query(ref,
         where('SenderId', '==', senderId),
@@ -23,7 +24,6 @@ export async function getFriendByTwoId(senderId, recieverId) {
 
     return friend.docs[0];
 }
-
 
 export async function deleteFriend(id) {
     await deleteDoc(doc(db, 'Friends', id));
@@ -35,4 +35,18 @@ export async function getAllUserRequested(userId) {
 
 export async function getAllUserRequest(userId) {
     return await getDocs(query(ref, where('SenderId', '==', userId)));
+}
+
+export async function getAllFriends(userId) {
+    const requested = await getDocs(query(ref, 
+        where('RecieverId', '==', userId),
+        where('IsAccepted', '==', true)
+    ));
+
+    const request = await getDocs(query(ref, 
+        where('SenderId', '==', userId),
+        where('IsAccepted', '==', true)
+    ));
+    
+    return [...request.docs, ...requested.docs];
 }
