@@ -3,9 +3,7 @@
 import { listen, select, toImage, getCookieUser, removecookie, style } from './utility.js';
 import { getUserById } from '../service/userService.js';
 
-const userHeader = select('.user-profile-header');
 const headerFriendBtn = select('.friend-nav-button');
-const headerChatsBtn = select('.chat-nav-button');
 const profile = select('.user-profile-header .profile');
 const userName = select('.user-profile-header .user-post-name');
 const headerProfileMenu = select('.profile-header-menu');
@@ -51,8 +49,4 @@ async function loadUserHeader() {
     headerFriendBtn.innerHTML = `
         <a href="./friends.html?userId=${userId}"><i class="fa-solid fa-user-group"></i></a>
     `;
-
-    headerChatsBtn.innerHTML = `
-    <a href="./chats.html?userId=${userId}"><i class="fa-solid fa-message"></i></a>
-`;
 }
