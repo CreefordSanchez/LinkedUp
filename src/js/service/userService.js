@@ -10,13 +10,14 @@ export async function newUser(name, email, password) {
     if (findUser != null) {
         return false;
     }
-
+    
     await addDoc(collection(db, 'Users'), {
         Name: name,
         Email: email,
         Password: password,
         ProfilePicture: ''
     });
+
     return true;
 }
 
