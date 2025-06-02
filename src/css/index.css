@@ -15,9 +15,12 @@ nav a{
 .main-page-content {
     height: calc(100vh - 72px);
     background-color: var(--app-black);
-    display: grid;
-    grid-template-columns: 1fr 780px 1fr;
     padding-top: 30px;
+}
+
+.scrolling-container {
+    margin-inline: 0;
+    padding-right: 270px;
 }
 
 /*Friend List*/
@@ -25,6 +28,7 @@ nav a{
     height: 100%;
     padding: 12px 10px;
     color: var(--app-white);
+    width: 350px;
 }
 
 .friend-list-header i{
@@ -37,15 +41,4 @@ nav a{
 
 .user-friend p {
     font-size: 14px; 
-}
-
-/*Chat List*/
-.left-side-container {
-    height: 100%;
-    padding: 12px 10px;
-    color: var(--app-white);
-}
-
-.side-menu i {
-    color: var(--app-fade-purple);
 }
