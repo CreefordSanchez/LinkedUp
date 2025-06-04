@@ -11,7 +11,7 @@ const postContainer = select('.scrolling-container');
 const userName = select('.user-name');
 const userPostCount = select('.user-post-count');
 const userFriendtCount = select('.user-friend-count');
- 
+const profilePicture = select('.profile-user-detail .profile');
 
 listen(window, 'load', async () => {    
     await loadMainContent();    
@@ -32,12 +32,16 @@ async function loadMainContent () {
 }
 
 async function isUserNotFound(userId) {
-    const user = await getUserById(userId);
+    const userDocs = await getUserById(userId);
+    const user = userDocs.data();
 
     if (user == null) {
         window.location.href = './index.html';
     } else {
-        userName.innerText = `${user.data().Name}`;
+        userName.innerText = `${user.Name}`;
+        profilePicture.innerHTML = `
+             ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
+        `;
     }
 }
 
@@ -47,16 +51,14 @@ async function showFriendCount(userId) {
     let count = 0;
 
     if (getRequest.size > 0) {
-        const requestList = getRequest.docs.filter(friend => friend.data.IsAccepted);
+        const requestList = getRequest.docs.filter(friend => friend.data().IsAccepted);
         count += requestList.length;
     }
 
     if (getRequested.size > 0) {
-        const requestedList = getRequested.docs.filter(friend => friend.data.IsAccepted);
-        console.log(requestedList.size);
+        const requestedList = getRequested.docs.filter(friend => friend.data().IsAccepted);
         count += requestedList.length;
     } 
-
     userFriendtCount.innerText = `${count} Friends`;
 }
 
