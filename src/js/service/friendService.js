@@ -38,15 +38,18 @@ export async function getAllUserRequest(userId) {
 }
 
 export async function getAllFriends(userId) {
-    const requested = await getDocs(query(ref, 
+    const requestedDoc = await getDocs(query(ref, 
         where('RecieverId', '==', userId),
         where('IsAccepted', '==', true)
     ));
 
-    const request = await getDocs(query(ref, 
+    const requestDoc = await getDocs(query(ref, 
         where('SenderId', '==', userId),
         where('IsAccepted', '==', true)
     ));
-    
-    return [...request.docs, ...requested.docs];
+
+     const requested = requestedDoc.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const request = requestDoc.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    return [...request, ...requested];
 }

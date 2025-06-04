@@ -1,7 +1,55 @@
 'use strict';
 
 import { toBase64, listen, select, style, selectAll, giveClass, newElementClass, toImage, getCookieUser } from './data/utility.js';
-import { getUserByEmail, getUserById } from './service/userService.js';
-import { newPost, getAllPost, getPostById } from './service/postService.js';
-import { addUserLikePost, getPostLikes } from './service/postLikeService.js'
-import { addPostComment, getAllPostComment } from './service/postCommentService.js';
+import { getAllUserRequest, getAllUserRequested } from './service/friendService.js';
+import {getUserById} from './service/userService.js'
+
+const friendList = select('.friend-list');
+
+listen(window, 'load', async () => {
+    await printFriend();
+});
+
+async function printFriend() {
+    let userId = getCookieUser();
+        let isEmpty = true;
+        const requestList = await getAllUserRequest(userId)
+        const requestedList = await getAllUserRequested(userId);
+    
+        if (requestList.size > 0) {        
+            for (const friend of requestList.docs) {
+                if (friend.data().IsAccepted) {
+                    isEmpty = false;
+                    await displayUser(friend.data().RecieverId);
+                }
+            }
+        } 
+    
+        if (requestedList.size > 0) {
+            for (const friend of requestedList.docs) {
+                if (friend.data().IsAccepted) {
+                    isEmpty = false;
+                    await displayUser(friend.data().SenderId);
+                }        
+            }
+        }
+    
+        if (isEmpty) {
+            displayList.innerHTML = '<h1>No Friends</h1>'
+        }
+}
+
+async function displayUser(userId) {
+    const getUser = await getUserById(userId);
+    const user = getUser.data();
+    const userBox = newElementClass('div', 'user-friend flex gap-10 pad-15');
+
+    userBox.innerHTML = `
+    <div class="profile">
+         ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
+    </div>
+    <p class="user-friend-name">${user.Name}</p>
+    `;
+
+    friendList.append(userBox);
+}
