@@ -1,7 +1,7 @@
 'use strict';
 
-import { toBase64, listen, select, style, selectAll, giveClass, newElementClass, toImage, getCookieUser } from './data/utility.js';
-import { getAllUserRequest, getAllUserRequested } from './service/friendService.js';
+import { listen, select, newElementClass, toImage, getCookieUser } from './data/utility.js';
+import { getAllFriends } from './service/friendService.js';
 import {getUserById} from './service/userService.js'
 
 const friendList = select('.friend-list');
@@ -12,31 +12,21 @@ listen(window, 'load', async () => {
 
 async function printFriend() {
     let userId = getCookieUser();
-        let isEmpty = true;
-        const requestList = await getAllUserRequest(userId)
-        const requestedList = await getAllUserRequested(userId);
-    
-        if (requestList.size > 0) {        
-            for (const friend of requestList.docs) {
-                if (friend.data().IsAccepted) {
-                    isEmpty = false;
-                    await displayUser(friend.data().RecieverId);
-                }
-            }
-        } 
-    
-        if (requestedList.size > 0) {
-            for (const friend of requestedList.docs) {
-                if (friend.data().IsAccepted) {
-                    isEmpty = false;
-                    await displayUser(friend.data().SenderId);
-                }        
-            }
+    let isEmpty = true;
+    const frienList = await getAllFriends(userId);
+
+    for (const friendDoc of frienList) {
+        const friend = friendDoc.data();
+        if (friend.IsAccepted) {
+            isEmpty = false;
+            let friendId = friend.RecieverId == userId ? friend.SenderId : friend.RecieverId;
+            await displayUser(friendId);
         }
+    }
     
-        if (isEmpty) {
-            displayList.innerHTML = '<h1>No Friends</h1>'
-        }
+    if (isEmpty) {
+        displayList.innerHTML = '<h1>No Friends</h1>'
+    }
 }
 
 async function displayUser(userId) {

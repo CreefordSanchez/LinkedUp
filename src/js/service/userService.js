@@ -22,7 +22,7 @@ export async function newUser(name, email, password) {
 }
 
 export async function getAllUser() {
-    return await getDocs(collection(db, 'Users'));;
+    return await getDocs(collection(db, 'Users'));
 }
 
 export async function getUserByEmail(email) {

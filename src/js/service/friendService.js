@@ -1,6 +1,6 @@
 "use strict";
 
-import { getFirestore, getDocs, doc, setDoc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
+import { getFirestore, getDocs, doc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 
 const db = getFirestore();
 const ref = collection(db, 'Friends');
@@ -48,8 +48,8 @@ export async function getAllFriends(userId) {
         where('IsAccepted', '==', true)
     ));
 
-     const requested = requestedDoc.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    const request = requestDoc.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+     const requested = requestedDoc.docs;
+    const request = requestDoc.docs;
 
     return [...request, ...requested];
 }

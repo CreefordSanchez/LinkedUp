@@ -22,7 +22,7 @@ listen(newFriendsBtn, 'click', async () => {
     newFriendsBtn.disabled = true;
 
     await displayNewUserList();
-
+    
     friendsBtn.disabled = false;
     requestBtn.disabled = false;
     requestedBtn.disabled = false;
@@ -65,10 +65,10 @@ listen(friendsBtn, 'click', async () => {
     friendsBtn.disabled = true;
 
     await displayFriends();
-    
+
+    newFriendsBtn.disabled = false;
     requestBtn.disabled = false;
     requestedBtn.disabled = false;
-    newFriendsBtn.disabled = false;
 });
 
 async function displayFriends() {
@@ -116,15 +116,16 @@ async function displayRequest() {
     let userId = getCookieUser();
     let isEmpty = true;
     const requestList = await getAllUserRequest(userId);
+
     for (const friend of requestList.docs) {
         if (!friend.data().IsAccepted) {
             isEmpty = false;
             await displayUser(friend, friend.data().RecieverId);
         }
     }
-
+    
     if (isEmpty) {
-        displayList.innerHTML = '<h1>No Send Friend Request</h1>';
+        displayList.innerHTML = '<h1>No Send Friend Request</h1>'
     }
 }
 
@@ -146,13 +147,11 @@ async function displayUser(friendDoc, userId) {
 
 listen(requestedBtn, 'click', async () => {
     displayList.innerHTML = '';
-    requestedBtn.disabled = true;
-    
-    await displayRequested();
-    
     newFriendsBtn.disabled = false;
     friendsBtn.disabled = false;
     requestBtn.disabled = false;
+    requestedBtn.disabled = true;
+    await displayRequested();
 });
 
 async function displayRequested() {
@@ -160,14 +159,12 @@ async function displayRequested() {
     let isEmpty = true;
     const requestedList = await getAllUserRequested(userId);
 
-    if (requestedList.size > 0) {
-        for (const friend of requestedList.docs) {
-            if (!friend.data().IsAccepted) {
-                isEmpty = false;
-                await displayRequestedUser(friend, friend.data().SenderId);
-            }
+    for (const friend of requestedList.docs) {
+        if (!friend.data().IsAccepted) {
+            isEmpty = false;
+            await displayRequestedUser(friend, friend.data().SenderId);
         }
-    } 
+    }
     
     if (isEmpty) {
         displayList.innerHTML = '<h1>No Friend Requested</h1>'
