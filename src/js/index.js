@@ -48,7 +48,7 @@ async function displayUser(userId) {
     <div class="profile">
          ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
     </div>
-    <p class="user-friend-name">${user.Name}</p>
+    <a class="user-post-name" href="./userProfile.html?userId=${getUser.id}">${user.Name}</a>
     `;
 
     friendList.append(userBox);

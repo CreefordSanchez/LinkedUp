@@ -20,11 +20,12 @@ const requestedBtn = select('.show-requested');
 listen(newFriendsBtn, 'click', async () => {
     displayList.innerHTML = '';
     newFriendsBtn.disabled = true;
+
+    await displayNewUserList();
+
     friendsBtn.disabled = false;
     requestBtn.disabled = false;
     requestedBtn.disabled = false;
-
-    await displayNewUserList();
 });
 
 async function displayNewUserList() {
@@ -61,12 +62,13 @@ async function displayNewUser(userDoc) {
 
 listen(friendsBtn, 'click', async () => {
     displayList.innerHTML = '';
-    newFriendsBtn.disabled = false;
     friendsBtn.disabled = true;
-    requestBtn.disabled = false;
-    requestedBtn.disabled = false;
 
     await displayFriends();
+    
+    requestBtn.disabled = false;
+    requestedBtn.disabled = false;
+    newFriendsBtn.disabled = false;
 });
 
 async function displayFriends() {
@@ -101,28 +103,28 @@ async function displayFriends() {
 
 listen(requestBtn, 'click', async () => {
     displayList.innerHTML = '';
-    newFriendsBtn.disabled = false;
-    friendsBtn.disabled = false;
     requestBtn.disabled = true;
-    requestedBtn.disabled = false;
 
     await displayRequest();
+    
+    newFriendsBtn.disabled = false;
+    friendsBtn.disabled = false;
+    requestedBtn.disabled = false;
 });
 
 async function displayRequest() {
     let userId = getCookieUser();
     let isEmpty = true;
     const requestList = await getAllUserRequest(userId);
-
-    if (requestList.size > 0) {
-        for (const friend of requestList.docs) {
-            if (!friend.data().IsAccepted) {
-                isEmpty = false;
-                await displayUser(friend, friend.data().RecieverId);
-            }
+    for (const friend of requestList.docs) {
+        if (!friend.data().IsAccepted) {
+            isEmpty = false;
+            await displayUser(friend, friend.data().RecieverId);
         }
-    } else {
-        displayList.innerHTML = '<h1>No Send Friend Request</h1>'
+    }
+
+    if (isEmpty) {
+        displayList.innerHTML = '<h1>No Send Friend Request</h1>';
     }
 }
 
@@ -144,11 +146,13 @@ async function displayUser(friendDoc, userId) {
 
 listen(requestedBtn, 'click', async () => {
     displayList.innerHTML = '';
+    requestedBtn.disabled = true;
+    
+    await displayRequested();
+    
     newFriendsBtn.disabled = false;
     friendsBtn.disabled = false;
     requestBtn.disabled = false;
-    requestedBtn.disabled = true;
-    await displayRequested();
 });
 
 async function displayRequested() {
