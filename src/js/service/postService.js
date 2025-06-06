@@ -1,7 +1,8 @@
 'use strict';
 
 import {getFirestore, getDocs, doc, setDoc, addDoc, collection, updateDoc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
-
+import { deleteAllPostLike } from './postLikeService.js';
+import {deleteAllPostComment} from './postCommentService.js'
 const db = getFirestore();
 const ref = collection(db, 'Posts');
 
@@ -27,5 +28,8 @@ export async function getUserPosts(userId) {
 }
 
 export async function deletePost(postId) {
+    await deleteAllPostLike(postId);
+    await deleteAllPostComment(postId);
     await deleteDoc(doc(db, 'Posts', postId));
 }
+
