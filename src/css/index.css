@@ -20,7 +20,9 @@ nav a{
 
 .scrolling-container {
     margin-inline: 0;
-    padding-right: 270px;
+    display: grid;
+    justify-items: start;
+    width: 719px;
 }
 
 /*Friend List*/
@@ -41,4 +43,12 @@ nav a{
 
 .user-friend p {
     font-size: 14px; 
+}
+
+
+/*Media Queries*/
+@media screen and (max-width: 745px) {
+    .right-side-container {
+        display: none;
+    }
 }
