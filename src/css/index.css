@@ -12,6 +12,10 @@ nav a{
     color: var(--app-purple);
 }
 
+.friend-nav-button a {
+    color: var(--app-white);
+}
+
 .main-page-content {
     height: calc(100vh - 72px);
     background-color: var(--app-black);

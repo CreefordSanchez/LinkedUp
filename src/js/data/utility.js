@@ -51,6 +51,10 @@ export function giveClass(element, name) {
     element.classList.add(name);
 }
 
+export function removeClass(element, name) {
+    element.classList.remove(name);
+}
+
 export function newElementClass(type, name) {
     return Object.assign(document.createElement(type), {className: name});
 }

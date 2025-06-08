@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./src/css/index.css" media="all">
+    <link rel="stylesheet" href="./src/css/index.css" media="all">    
     <script src="./src/js/service/firestore.js" type="module"></script>
     <script src="./src/js/data/loadHeader.js" type="module"></script>
     <script src="./src/js/data/loadPost.js" type="module"></script>
@@ -36,6 +36,7 @@
                     <div class="profile"></div>
                     <a class="user-post-name"></a>              
                 </div>
+                <i class="open-header-nav fa-solid fa-bars"></i>
             </div>
         </header>
         <div class="main-page-content container flex-between">
@@ -121,6 +122,35 @@
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 Log Out
             </a>
+        </div>
+
+        <div class="header-side-nav">
+            <div class="side-nav container flex-align-center">
+                <ul>
+                    <li>
+                        <a href="./index.html" class="current-page-nav">
+                            <i class="fa-solid fa-house"></i> Home
+                        </a>
+                    </li>
+                    <li class="friend-nav-button">
+                        <a>
+                            <i class="fa-solid fa-user-group"></i> Friends
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="side-nav-profile flex-align-center">
+                <div class="container flex-between flex-align-center">
+                    <div class="side-profile flex-align-center gap-10">
+                        <div class="profile"></div>
+                        <p>Creeford</p>
+                    </div>
+                    <a class="log-out">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Log Out
+                    </a>
+                </div>                
+            </div>
         </div>
     </main>
 </body>

@@ -83,3 +83,61 @@ main {
 .floating-screen {
     background-color: var(--app-light-gray);
 }
+
+/*header nav side*/
+.open-header-nav {
+    font-size: 25px;
+    color: var(--app-white);
+    display: none;
+    cursor: pointer;
+}
+
+.header-side-nav {
+    position: absolute;
+    top: 70px;
+    left: -100vw;
+    height: calc(100% - 70px);
+    width: 100%;
+    background-color: var(--app-black);
+    color: var(--app-white);
+    border-top: 2px solid var(--app-gray);
+    transition: 0.5s ease;
+}
+
+.header-side-show {
+    left: 0;
+}
+
+.side-nav {
+    height: calc(100% - 70px);
+}
+
+.side-nav ul {
+    display: grid;
+    gap: 80px;
+}
+
+.side-nav a {
+    font-size: 45px;
+}
+
+.side-nav-profile {
+    background-color: var(--app-gray);
+    height: 70px;
+}
+
+/*Media queries*/
+@media screen and (max-width: 700px) {
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    nav, .user-profile-header {
+        display: none;
+    }
+
+    .open-header-nav {
+        display: inline;
+    }
+}
