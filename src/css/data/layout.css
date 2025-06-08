@@ -31,8 +31,8 @@ nav ul {
 }
 
 nav a {
-    color: var(--app-fade-purple);
     font-size: 25px;
+    color: var(--app-white);
 }
 
 .user-profile-header {
@@ -96,7 +96,7 @@ main {
     position: absolute;
     top: 70px;
     left: -100vw;
-    height: calc(100% - 70px);
+    height: calc(100vh - 70px);
     width: 100%;
     background-color: var(--app-black);
     color: var(--app-white);
@@ -119,10 +119,11 @@ main {
 
 .side-nav a {
     font-size: 45px;
+    color: var(--app-white);
 }
 
 .side-nav-profile {
-    background-color: var(--app-gray);
+    border-top: 2px solid var(--app-gray);
     height: 70px;
 }
 

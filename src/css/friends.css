@@ -2,10 +2,6 @@
 @import url(./data/layout.css);
 @import url(./data/utility.css);
 
-nav a{
-    color: #6d006d;
-}
-
 .friend-nav-button a {
     color: var(--app-purple);
 }

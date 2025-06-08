@@ -15,68 +15,100 @@
     <script src="./src/js/friends.js" type="module"></script>
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <h1>LinkedUp</h1>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="./index.html"><i class="fa-solid fa-house current-page-nav"></i></a>
-                    </li>
-                    <li class="friend-nav-button">
-                        <a href="./friends.html"><i class="fa-solid fa-user-group"></i></a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="user-profile-header">
-                <div class="profile"></div>
-                <a class="user-post-name"></a>              
+    <main>
+        <header>
+            <div class="container header-content">
+                <h1>LinkedUp</h1>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="./index.html"><i class="fa-solid fa-house current-page-nav"></i></a>
+                        </li>
+                        <li class="friend-nav-button">
+                            <a href="./friends.html"><i class="fa-solid fa-user-group"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="user-profile-header">
+                    <div class="profile"></div>
+                    <a class="user-post-name"></a>              
+                </div>
+                <i class="open-header-nav fa-solid fa-bars"></i>
             </div>
+        </header>
+
+        <div class="flex">
+            <section class="friends-nav-tab padding-around">
+                <h2>Friends</h2>
+                <div class="friend-nav-buttons">
+                    <button class="show-new-friends flex flex-align-center pad-top-15">
+                        <i class="fa-solid fa-house flex-center"></i>
+                        New People
+                    </button>
+                    <button class="show-friends flex flex-align-center pad-top-15">
+                        <i class="fa-solid fa-house flex-center"></i>
+                        Friends
+                    </button>
+                    <button class="show-request flex flex-align-center pad-top-15">
+                        <i class="fa-solid fa-house flex-center"></i>
+                        Friend Request
+                    </button>
+                    <button class="show-requested flex flex-align-center pad-top-15">
+                        <i class="fa-solid fa-house flex-center"></i>
+                        Friend Requested
+                    </button>
+                </div>
+            </section>
+
+            <section class="display-people padding-around">
+                <div class="display-header">
+                    <h2>Example</h2>
+                </div>
+                <div class="display-list pad-top-15">
+
+                </div>
+            </section>
         </div>
-    </header>
 
-    <div class="flex">
-        <section class="friends-nav-tab padding-around">
-            <h2>Friends</h2>
-            <div class="friend-nav-buttons">
-                <button class="show-new-friends flex flex-align-center pad-top-15">
-                    <i class="fa-solid fa-house flex-center"></i>
-                    New People
-                </button>
-                <button class="show-friends flex flex-align-center pad-top-15">
-                    <i class="fa-solid fa-house flex-center"></i>
-                    Friends
-                </button>
-                <button class="show-request flex flex-align-center pad-top-15">
-                    <i class="fa-solid fa-house flex-center"></i>
-                    Friend Request
-                </button>
-                <button class="show-requested flex flex-align-center pad-top-15">
-                    <i class="fa-solid fa-house flex-center"></i>
-                    Friend Requested
-                </button>
-            </div>
-        </section>
+        <div class="profile-header-menu padding-around border-10">
+            <a class="view-profile">
+                <i class="fa-solid fa-user"></i>
+                Profile
+            </a>
+            <a class="log-out">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Log Out
+            </a>
+        </div>
 
-        <section class="display-people padding-around">
-            <div class="display-header">
-                <h2>Example</h2>
-            </div>
-            <div class="display-list pad-top-15">
-
-            </div>
-        </section>
-    </div>
-
-    <div class="profile-header-menu padding-around border-10">
-        <a class="view-profile">
-            <i class="fa-solid fa-user"></i>
-            Profile
-        </a>
-        <a class="log-out">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            Log Out
-        </a>
-    </div>
+        <div class="header-side-nav">
+                <div class="side-nav container flex-align-center">
+                    <ul>
+                        <li>
+                            <a href="./index.html" class="current-page-nav">
+                                <i class="fa-solid fa-house"></i> Home
+                            </a>
+                        </li>
+                        <li class="friend-nav-button">
+                            <a>
+                                <i class="fa-solid fa-user-group"></i> Friends
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="side-nav-profile flex-align-center">
+                    <div class="container flex-between flex-align-center">
+                        <div class="side-profile flex-align-center gap-10">
+                            <div class="profile"></div>
+                            <p>Creeford</p>
+                        </div>
+                        <a class="log-out">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Log Out
+                        </a>
+                    </div>                
+                </div>
+        </div>
+    </main>
 </body>
 </html>

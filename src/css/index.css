@@ -8,7 +8,7 @@ nav a{
     color: #6d006d;
 }
 
-.current-page-nav {
+.current-page-nav, .side-nav .current-page-nav {
     color: var(--app-purple);
 }
 
