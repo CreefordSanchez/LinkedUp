@@ -102,6 +102,7 @@ main {
     color: var(--app-white);
     border-top: 2px solid var(--app-gray);
     transition: 0.5s ease;
+    display: none;
 }
 
 .header-side-show {
@@ -138,7 +139,7 @@ main {
         display: none;
     }
 
-    .open-header-nav {
+    .open-header-nav, .header-side-nav {
         display: inline;
     }
 }
