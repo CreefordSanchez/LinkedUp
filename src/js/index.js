@@ -25,7 +25,7 @@ async function printFriend() {
     }
     
     if (isEmpty) {
-        displayList.innerHTML = '<h1>No Friends</h1>'
+        friendList.innerHTML = '<p>No Friends</p>'
     }
 }
 

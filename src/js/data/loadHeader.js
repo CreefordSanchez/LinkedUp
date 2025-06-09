@@ -10,6 +10,7 @@ const headerProfileMenu = select('.profile-header-menu');
 const viewProfile = select('.view-profile');
 const logOut = selectAll('.log-out');
 const sideNav = select('.header-side-nav');
+const sideNavProfilePic = select('.side-nav-profile .profile');
 const sideNavProfile = select('.side-nav-profile p');
 const openHeaderNav = select('.open-header-nav');
 
@@ -60,6 +61,10 @@ async function loadUserHeader() {
     let userId = getCookieUser();
     const user = await getUserById(userId);
 
+    sideNavProfilePic.innerHTML = `
+            ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
+    `;
+    
     profile.innerHTML = `
             ${user.data().ProfilePicture == '' ? '' : `<img src="${toImage(user.data().ProfilePicture)}">`}
     `;
