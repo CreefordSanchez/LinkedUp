@@ -19,7 +19,6 @@ main {
     display: flex;
     align-items: end;
     padding: 5px;
-    width: 40%;
 }
 
 .login-photo h1 {
@@ -89,3 +88,36 @@ form {
     color: var(--app-purple);
 }
 
+/*media query*/
+@media screen and (max-width: 1145px) {
+    .login-form-container, .login-photo {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .login-photo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .login-photo h1{
+        display: none;
+    }
+
+    main {
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .login-form-container {
+        position: relative;
+        z-index: 1;
+        background-color: #00000087;
+        width: 100%;
+    }
+}
