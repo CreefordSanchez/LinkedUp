@@ -1,6 +1,6 @@
 'use strict';
 
-import { listen, select, newElementClass, toImage, style, getCookieUser, selectAll, giveClass, toBase64 } from "./data/utility.js";
+import { listen, select, newElementClass, toImage, style, getCookieUser, giveClass } from "./data/utility.js";
 import { getUserById } from "./service/userService.js";
 import { getAllUser } from "./service/userService.js";
 import { getFriendByTwoId, addFriend, deleteFriend, getAllUserRequested, getAllUserRequest, getFriendById, editFriend } from "./service/friendService.js";
@@ -225,4 +225,12 @@ listen(displayList, 'click', async (e) => {
         await editFriend(friendDoc.id, friend);
         style(userBox, 'display', 'none');
     }
+});
+
+/*Friend side nav */
+const openNav = select('.open-friend-header');
+const friendNav = select('.friends-nav-tab');
+
+listen (openNav, 'click', () => {
+    style(friendNav, 'left', '-100vw');
 });
