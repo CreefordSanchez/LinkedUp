@@ -67,6 +67,8 @@ async function showFriendCount(userId) {
 async function showCreatePost(userId) {
     if (getCookieUser() != userId) {
         giveClass(createPostBox, 'remove-post-box-create');
+        style(pictureInput, 'display', 'none');
+        style(selectImageLogo, 'display', 'none');
     } 
 }
 
