@@ -76,3 +76,33 @@
     font-size: 15px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 540px) {
+    .profile-user-detail .profile {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profile-picture {
+        min-width: 150px;
+        height: 150px;
+    }
+
+    .user-name {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .user-name {
+        font-size: 24px;
+    }
+    
+    .profile-user-detail .profile {
+        min-width: 150px;
+    }
+
+    .profile-detail {
+        padding-left: 10px;
+    }
+}
