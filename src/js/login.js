@@ -39,7 +39,7 @@ function getExpires() {
 
 async function logginValidation() {
     const getUser = await getUserByEmail(emailLogin.value);
-
+    
     if (getUser == null) {
         errorEmailLoggin.textContent = 'Email not found';
         return false;
@@ -85,7 +85,7 @@ listen(createBtn, 'click', async () => {
                 clearCreate();
                 Redirection(false);
         } else {
-            errorEmailCreate.textContent = 'Email allready exist';
+            errorEmailCreate.textContent = 'Email or Name allready exist';
         }             
     }
 });

@@ -6,8 +6,9 @@ const db = getFirestore();
 
 export async function newUser(name, email, password) {
     const findUser = await getUserByEmail(email);
+    const findUserName = await getUserByName(name);
 
-    if (findUser != null) {
+    if (findUser != null || findUserName != null) {
         return false;
     }
     
@@ -27,6 +28,16 @@ export async function getAllUser() {
 
 export async function getUserByEmail(email) {
     const user = await getDocs(query(collection(db, 'Users'), where('Email', '==', email)));
+
+    if (user.docs[0] == null) {
+        return null;
+    }
+
+    return user.docs[0];
+}
+
+export async function getUserByName(name) {
+    const user = await getDocs(query(collection(db, 'Users'), where('Name', '==', name)));
 
     if (user.docs[0] == null) {
         return null;
