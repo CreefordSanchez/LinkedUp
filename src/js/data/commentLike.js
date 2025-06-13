@@ -1,6 +1,6 @@
 'use strict';
 
-import { listen, select, style, newElementClass, getCookieUser } from './utility.js';
+import { listen, select, style, newElementClass, getCookieUser, toImage } from './utility.js';
 import { getUserById } from '../service/userService.js';
 import { addUserLikePost, getPostLikes } from '../service/postLikeService.js'
 import { addPostComment, getAllPostComment } from '../service/postCommentService.js';
@@ -70,16 +70,18 @@ async function loadCommentPost(postId) {
 
 async function printCommentPost(doc) {
     const comment = newElementClass('div', 'user-comment');
-    const user = await getUserById(doc.UserId);
-
+    const userDoc = await getUserById(doc.UserId);
+    const user = userDoc.data();
     if (select('.no-comment-found') != null) {
         commentList.innerHTML = '';
     }
 
     comment.innerHTML = `
-    <div class="profile"></div>
+    <div class="profile">
+        ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
+    </div>
     <div class="text">
-        <p class="user-comment-name">${user.data().Name}</p>
+        <p class="user-comment-name">${user.Name}</p>
         <p class="user-text">
             ${doc.Comment}
         </p>
