@@ -21,6 +21,23 @@ nav a{
     width: 200px;
     height: 200px;
     border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+}
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+}
+
+.select-photo-box{
+    color: var(--app-black);
+    background-color: var(--app-white);
 }
 
 .user-name {

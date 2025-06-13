@@ -1,7 +1,7 @@
 'use strict';
 
-import { listen, select, getCookieUser, giveClass, newElementClass, toImage, style } from "./data/utility.js";
-import { getUserById } from "./service/userService.js";
+import { listen, select, getCookieUser, giveClass, newElementClass, toImage, style, toBase64, selectAll } from "./data/utility.js";
+import { editUserPicture, getUserById } from "./service/userService.js";
 import { getUserPosts, deletePost } from "./service/postService.js";
 import { getPostLikes } from "./service/postLikeService.js";
 import { getAllUserRequest, getAllUserRequested } from "./service/friendService.js";
@@ -39,9 +39,11 @@ async function isUserNotFound(userId) {
         window.location.href = './index.html';
     } else {
         userName.innerText = `${user.Name}`;
-        profilePicture.innerHTML = `
-             ${user.ProfilePicture == '' ? '' : `<img src="${toImage(user.ProfilePicture)}">`}
-        `;
+
+        if (user.ProfilePicture != '') {
+            style(selectImageLogo, 'display', 'none');
+            style(profilePicture, 'backgroundImage', `url(${toImage(user.ProfilePicture)})`);
+        } 
     }
 }
 
@@ -119,3 +121,53 @@ listen(postContainer, 'click', async (e) => {
         style(post, 'display', 'none');
     }
 });
+
+//Edit Profile Picture
+const pictureInput = select('.profile-picture');
+const selectImageLogo = select('.select-photo-box');
+
+listen(pictureInput, 'change', async () => {
+    const file = pictureInput.files[0];
+    
+    if (file != null) {
+        const reader = new FileReader();
+        reader.onload = async (item) => {
+            if (validPicture(item.target.result)) {                
+                style(profilePicture, 'backgroundImage', `url(${item.target.result})`);
+                style(selectImageLogo, 'display', 'none');
+                await editProfilePictures(item.target.result);
+            } else {
+                pictureInput.value = '';
+            }
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
+async function editProfilePictures(image) {
+    await editUserPicture(getCookieUser(), await toBase64(pictureInput.files[0]));
+    const editAllPfPicture = selectAll('.post-header .profile');
+    const headerPicture = select('.user-profile-header .profile');
+    let img =  `<img src="${image}">`;
+
+    editAllPfPicture.forEach(picture => {
+        picture.innerHTML =  img;
+    });
+    
+    headerPicture.innerHTML = img;
+}
+
+function validPicture(img) {
+    const data = img.split(';')[0];
+    const type = data.split('/')[1];
+    
+    switch (type) {
+        case 'jpeg':
+        case 'jpg':
+        case 'png':
+            return true;
+        default:
+            return false;
+    }
+}

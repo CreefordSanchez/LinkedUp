@@ -44,3 +44,12 @@ export async function getUserById(id) {
 
     return user;
 }
+
+export async function editUserPicture(id, image) {
+    const userDoc = await getUserById(id);
+    const user = userDoc.data();
+
+    user.ProfilePicture = image;
+
+    await updateDoc(doc(db, 'Users', id), user);
+}
