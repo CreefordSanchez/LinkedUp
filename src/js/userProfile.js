@@ -132,10 +132,15 @@ listen(pictureInput, 'change', async () => {
     if (file != null) {
         const reader = new FileReader();
         reader.onload = async (item) => {
-            if (validPicture(item.target.result)) {                
-                style(profilePicture, 'backgroundImage', `url(${item.target.result})`);
-                style(selectImageLogo, 'display', 'none');
-                await editProfilePictures(item.target.result);
+            if (validPicture(item.target.result)) {    
+                try {
+                    await editProfilePictures(item.target.result);
+                    style(profilePicture, 'backgroundImage', `url(${item.target.result})`);
+                    style(selectImageLogo, 'display', 'none');
+        
+                }  catch(e) {
+                    pictureInput.value = '';
+                }                             
             } else {
                 pictureInput.value = '';
             }
