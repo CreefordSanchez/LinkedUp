@@ -4,9 +4,26 @@
 @import url(./data/postBox.css);
 @import url(./data/comment.css);
 
+/*Header*/
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--app-black);
+    z-index: 3;
+}
+
+.header-side-nav {
+    position: fixed;
+    top: 70px;
+    z-index: 3;
+}
+
+/*User page*/
 .profile-user-detail {
     width: min(100% - 20px, 800px);
     margin-inline: auto;
+    padding-top: 100px;
 }
 
 .profile-detail {
